@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="7.5069118mm"
+   height="10.80658mm"
+   viewBox="0 0 7.5069117 10.80658"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="P1-1.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4"
+     inkscape:cx="-30.892014"
+     inkscape:cy="-35.790437"
+     inkscape:document-units="in"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1858"
+     inkscape:window-height="1057"
+     inkscape:window-x="54"
+     inkscape:window-y="1072"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-126.65154,-82.086281)">
+    <path
+       inkscape:connector-curvature="0"
+       id="path4560"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 134.15082,85.525869 q 0,0.843359 -0.28112,1.562695 -0.28112,0.711068 -0.83509,1.231966 -0.55397,0.520898 -1.38079,0.810286 -0.82683,0.289388 -1.91823,0.289388 h -1.03353 v 3.472656 h -2.05052 V 82.086285 h 3.16673 q 1.05006,0 1.85208,0.231511 0.81029,0.223242 1.35599,0.661458 0.55397,0.438216 0.83509,1.083138 0.28939,0.636654 0.28939,1.463477 z m -2.1332,0.14056 q 0,-0.429948 -0.14056,-0.777214 -0.13229,-0.355534 -0.41341,-0.603581 -0.27286,-0.248047 -0.69454,-0.380338 -0.42167,-0.132292 -1.00045,-0.132292 h -1.0666 v 3.960482 h 1.13274 q 0.52917,0 0.93431,-0.14056 0.40515,-0.148828 0.678,-0.42168 0.28112,-0.272851 0.42168,-0.65319 0.14883,-0.380338 0.14883,-0.851627 z" />
+  </g>
+</svg>
