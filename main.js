@@ -17,6 +17,7 @@ async function main() {
     canvas.width = parseInt(style.getPropertyValue('width'))
     canvas.height = parseInt(style.getPropertyValue('height'))
     renderer = new THREE.WebGLRenderer({canvas})
+    renderer.setClearColor(0x121212)
 
     //Set up camera
     var size = new THREE.Vector2()
@@ -38,16 +39,18 @@ async function main() {
     //Add lighting
     const ambient = new THREE.AmbientLight(0x101010)
     scene.add(ambient)
-    const light1 = new THREE.PointLight(0xffaaaa, 2, 0, 2)
-    light1.position.set(30, 80, 50)
-    scene.add(light1)
-    const light2 = new THREE.PointLight(0xffaaaa, 1, 0, 2)
-    light2.position.set(-70, 80, 50)
-    scene.add(light2)
+    for (var i = 0; i < 10; i++) {
+        var light1 = new THREE.PointLight(0xffffff, .12, 0, 2)
+        light1.position.set(-300 + 100 * i, 800, 500)
+        scene.add(light1)
+        const light2 = new THREE.PointLight(0xffcccc, .06, 0, 2)
+        light2.position.set(2000, 300, -300 - 100 * i)
+        scene.add(light2)
+    }
 
     //Show axes (For now)
-    const axesHelper = new THREE.AxesHelper(4)
-    scene.add(axesHelper)
+    //const axesHelper = new THREE.AxesHelper(4)
+    //scene.add(axesHelper)
 
     render()
 
@@ -201,9 +204,11 @@ async function doGenerate(first, last) {
         }
     }
 
+    await sleep(1)
+
     const material = new THREE.MeshStandardMaterial({
         color: 0x2150CE,
-        side: THREE.DoubleSide,
+        side: THREE.FrontSide,
         roughness: 0.9,
         emissive: 0x0f0f0f
     })
@@ -216,16 +221,17 @@ async function doGenerate(first, last) {
         mask.updateMatrixWorld()
         var a = CSG.fromMesh(src)
         var b = CSG.fromMesh(mask)
-        var result = a.subtract(b)
+        var result = a.intersect(b)
         var toAdd = CSG.toMesh(result, mask.matrix)
         toAdd.material = material
         scene.remove(src)
         scene.remove(mask)
         scene.add(toAdd)
         render()
+        await sleep(1)
     }
 
-    download()
+    //download()
 }
 
 function download() {
@@ -248,7 +254,7 @@ async function createExtrusion(name, depth, pos, doSide) {
                 curveSegments: 30,
                 bevelEnabled: false,
                 steps: 40,
-                depth: (doSide ? -depth : depth)
+                depth: depth
             }
 
             //Get this path and make it shapes
@@ -256,11 +262,11 @@ async function createExtrusion(name, depth, pos, doSide) {
             const shapes = path.toShapes(true);
 
             //Material settings
-            const material = new THREE.MeshStandardMaterial({
-                color: 0x2150CE,
-                side: THREE.DoubleSide,
-                roughness: 0.9,
-                emissive: 0x0f0f0f
+            const material = new THREE.MeshPhongMaterial({
+                color: (doSide ? 0x500000 : 0x005000),
+                side: THREE.FrontSide,
+                roughness: .95,
+                //emissive: 0x0f0f0f
             })
 
             //Make each shape a mesh
@@ -275,7 +281,7 @@ async function createExtrusion(name, depth, pos, doSide) {
             if (doSide) {
                 mesh.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2)
                 mesh.translateX(pos)
-                mesh.translateZ(depth)
+                //mesh.translateZ(-depth)
             } else {
                 mesh.translateX(pos)
                 mesh.translateZ(-depth)
@@ -284,23 +290,6 @@ async function createExtrusion(name, depth, pos, doSide) {
             res(mesh)
         })
     })
-}
-
-async function createLetterDebug(letter) {
-    const group = new THREE.Group()
-    for (var i = 1; i <= Math.max(1, letterData[letter].max); i++) {
-        group.add(await createExtrusion(letter + Math.max(1, letterData[letter].max) + "-" + i, 5, 0, false))
-        //await sleep(1000)
-        var select = scene.getObjectByName(letter + Math.max(1, letterData[letter].max) + "-" + i)
-        scene.remove(select)
-    }
-    //console.log(letter)
-    //console.log(group)
-    const box = (new THREE.Box3()).setFromObject(group)
-    //console.log(box)
-    //console.log(box.max.x - box.min.x)
-    letterData[letter].width = box.max.x - box.min.x
-    //console.log(letterData)
 }
 
 function animate() {
