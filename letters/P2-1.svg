@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.6568543"
-     inkscape:cx="-40.981904"
+     inkscape:cx="-71.12233"
      inkscape:cy="-0.28095251"
      inkscape:document-units="in"
      inkscape:current-layer="layer1"
@@ -58,9 +58,8 @@
      id="layer1"
      transform="translate(-126.66897,-134.10171)">
     <path
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 532.94531,197.28125 V 238.125 h 7.75 V 229 v -4 -6.375 -6.98242 -7.98633 h 4.03125 c 1.45835,0 2.71878,0.16667 3.78125,0.5 1.0625,0.33333 1.93748,0.81249 2.625,1.4375 0.70834,0.62498 1.22917,1.3854 1.5625,2.28125 0.35417,0.87499 0.53125,1.85416 0.53125,2.9375 0,0.28353 -0.0118,0.55961 -0.0332,0.83008 h 8.03711 c 0.0335,-0.4475 0.0586,-0.89904 0.0586,-1.36133 0,-2.08333 -0.36458,-3.92709 -1.09375,-5.53125 -0.70833,-1.62502 -1.76042,-2.9896 -3.15625,-4.09375 -1.37499,-1.10418 -3.08332,-1.93751 -5.125,-2.5 -2.02084,-0.58333 -4.35418,-0.875 -7,-0.875 z"
-       transform="matrix(0.26458333,0,0,0.26458333,-14.339474,81.904382)"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 126.66897,144.90829 v -10.80658 h 2.05052 v 2.41432 1.05834 1.68672 1.84743 2.11305 h 1.0666 c 0.38586,0 0.71935,-0.0441 1.00046,-0.13229 0.28112,-0.0882 0.51262,-0.21497 0.69453,-0.38034 0.18742,-0.16536 0.32522,-0.36656 0.41341,-0.60358 0.0937,-0.23151 0.14056,-0.49058 0.14056,-0.77722 0,-0.075 -0.003,-0.14806 -0.009,-0.21962 h 2.12648 c 0.009,0.1184 0.0155,0.23787 0.0155,0.36018 0,0.55122 -0.0965,1.03905 -0.28939,1.46348 -0.18741,0.42995 -0.46578,0.791 -0.83509,1.08314 -0.3638,0.29215 -0.8158,0.51263 -1.35599,0.66146 -0.53468,0.15434 -1.15204,0.23151 -1.85208,0.23151 z"
        id="path4560-1"
        inkscape:connector-curvature="0" />
   </g>

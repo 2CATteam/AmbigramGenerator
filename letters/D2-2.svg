@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="-58.75253"
+     inkscape:cx="-119.03338"
      inkscape:cy="18.874383"
      inkscape:document-units="in"
      inkscape:current-layer="layer1"
@@ -58,10 +58,9 @@
      id="layer1"
      transform="translate(-14.335779,-148.03833)">
     <path
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 108.37891,249.95508 v 40.84375 h 10.375 c 3.60416,0 6.69791,-0.48958 9.28125,-1.46875 2.58333,-0.99999 4.69791,-2.40624 6.34375,-4.21875 1.66666,-1.83332 2.88541,-4.04167 3.65625,-6.625 0.79166,-2.58333 1.1875,-5.45831 1.1875,-8.625 0,-0.76949 -0.0272,-1.50647 -0.0664,-2.22852 h -8.28906 c 0.0666,0.86737 0.10547,1.77108 0.10547,2.72852 0,4.83333 -0.97917,8.37502 -2.9375,10.625 -1.95834,2.25 -4.82292,3.375 -8.59375,3.375 h -3.375 v -27.96875 h 0.002 v -6.4375 z"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 14.335779,158.8449 v -10.80657 h 2.745052 c 0.953601,0 1.772155,0.12953 2.455664,0.38861 0.683506,0.26458 1.242989,0.63665 1.67845,1.11621 0.440971,0.48506 0.763432,1.06936 0.967383,1.75286 0.20946,0.68351 0.314193,1.44418 0.314193,2.28203 0,0.2036 -0.0072,0.39859 -0.01757,0.58963 h -2.193147 c 0.01762,-0.22949 0.02791,-0.4686 0.02791,-0.72192 0,-1.27882 -0.259072,-2.21589 -0.777213,-2.8112 -0.518144,-0.59531 -1.276065,-0.89297 -2.273763,-0.89297 h -0.892969 v 7.40007 h 5.29e-4 v 1.70325 z"
        id="path4536-8-2"
-       transform="matrix(0.26458333,0,0,0.26458333,-14.339474,81.904382)"
        inkscape:connector-curvature="0" />
   </g>
 </svg>

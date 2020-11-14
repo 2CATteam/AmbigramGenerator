@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="-175.40783"
+     inkscape:cx="-295.96953"
      inkscape:cy="-137.98197"
      inkscape:document-units="in"
      inkscape:current-layer="layer1"
@@ -58,9 +58,8 @@
      id="layer1"
      transform="translate(-145.33708,-134.23814)">
     <path
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 603.50195,197.79688 v 40.84374 h 7.6875 v -16.90624 -6 -6.29688 -5.23438 h 3.375 c 2.54166,0 4.44792,0.43751 5.71875,1.3125 1.18523,0.81604 1.81076,2.12734 1.89063,3.92188 h 8.06445 c 0.003,-0.12097 0.0137,-0.23616 0.0137,-0.35938 0,-2.08331 -0.35418,-3.84374 -1.0625,-5.28124 -0.68749,-1.43751 -1.67709,-2.60418 -2.96875,-3.5 -1.29165,-0.89583 -2.85416,-1.53133 -4.6875,-1.90626 -1.83333,-0.39571 -3.87501,-0.59374 -6.125,-0.59374 z"
-       transform="matrix(0.26458333,0,0,0.26458333,-14.339474,81.904382)"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 145.3371 145.0447 V 134.2381 H 147.3711 V 138.7113 V 140.2988 V 141.9648 V 143.3497 H 148.264 C 148.9365 143.3497 149.4409 143.234 149.7771 143.0025 C 150.0907 142.7866 150.2562 142.4396 150.2773 141.9648 H 152.4111 C 152.4119 141.9968 152.4151 142.0273 152.4151 142.0599 C 152.4151 142.6111 152.3214 143.0769 152.1339 143.4572 C 151.9521 143.8376 151.6902 144.1463 151.3485 144.3833 C 151.0067 144.6203 150.5933 144.7884 150.1082 144.8876 C 149.6232 144.9923 149.083 145.0447 148.4877 145.0447 Z"
        id="path4564-3"
        inkscape:connector-curvature="0" />
   </g>

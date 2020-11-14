@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="4"
-     inkscape:cx="-50.132417"
+     inkscape:cx="-92.757417"
      inkscape:cy="5.1949491"
      inkscape:document-units="in"
      inkscape:current-layer="layer1"
@@ -58,9 +58,8 @@
      id="layer1"
      transform="translate(-97.935844,-148.03833)">
     <path
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 445.84766,249.95508 -3.78125,11.96875 -1.71875,6.15625 -2.75,10.5625 h 4.8125 l 4.53125,-13.90625 1.96875,-6.25 0.28125,9.21875 0.75,23.09375 h 6.78125 l -2.03125,-40.84375 z"
-       transform="matrix(0.26458333,0,0,0.26458333,-14.339474,81.904382)"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 103.62438,158.8449 -1.00045,-3.16673 -0.45475,-1.62884 -0.72761,-2.79466 h 1.27331 l 1.19889,3.67936 0.5209,1.65365 0.0744,-2.43913 0.19843,-6.11022 h 1.79421 l -0.53744,10.80657 z"
        id="path4554-3-8"
        inkscape:connector-curvature="0" />
   </g>

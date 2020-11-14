@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2"
-     inkscape:cx="-232.71629"
+     inkscape:cx="-317.96629"
      inkscape:cy="-94.083159"
      inkscape:document-units="in"
      inkscape:current-layer="layer1"
@@ -58,9 +58,8 @@
      id="layer1"
      transform="translate(-145.40323,-147.44818)">
     <path
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 603.75195,247.72461 v 40.84375 h 7.6875 v -16.90625 c 3.39511,-1.00365 6.69984,-1.73638 10.15625,-2.5 0,0 2.47918,-0.57289 3.5625,-1.09375 1.10419,-0.52082 2.05209,-1.1979 2.84375,-2.03125 0.79166,-0.85417 1.40624,-1.86459 1.84375,-3.03125 0.43741,-1.16667 0.65625,-2.50002 0.65625,-4 0,-0.17541 -0.0165,-0.33503 -0.0215,-0.50586 h -8.14063 c 0.0638,0.39171 0.0996,0.80765 0.0996,1.25586 0,0.9583 -0.18757,1.81249 -0.5625,2.5625 -0.375,0.72915 -0.90625,1.34372 -1.59375,1.84375 -0.68749,0.49999 -1.52083,0.87517 -2.5,1.125 -0.95833,0.24983 -2.03126,0.375 -3.21875,0.375 h -3.125 v -11.53125 h 0.002 v -6.40625 z"
-       transform="matrix(0.26458333,0,0,0.26458333,-14.339474,81.904382)"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 145.4032 158.2548 V 147.4482 H 147.4372 V 151.9213 C 148.3355 152.1868 149.2099 152.3807 150.1244 152.5828 C 150.1244 152.5828 150.7803 152.7343 151.067 152.8721 C 151.3591 153.0099 151.6099 153.1891 151.8194 153.4096 C 152.0288 153.6356 152.1914 153.9029 152.3072 154.2116 C 152.4229 154.5203 152.4808 154.8731 152.4808 155.2699 C 152.4808 155.3163 152.4768 155.3585 152.4748 155.4038 H 150.321 C 150.3379 155.3001 150.3474 155.1901 150.3474 155.0715 C 150.3474 154.8179 150.2978 154.5919 150.1985 154.3935 C 150.0993 154.2006 149.9588 154.038 149.7768 153.9057 C 149.5949 153.7734 149.3745 153.6741 149.1154 153.608 C 148.8618 153.5419 148.578 153.5088 148.2638 153.5088 H 147.4369 V 156.5598 H 147.4375 V 158.2548 Z"
        id="path4564-0"
        inkscape:connector-curvature="0" />
   </g>

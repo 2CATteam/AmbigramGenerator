@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2"
-     inkscape:cx="-86.047423"
+     inkscape:cx="-171.29742"
      inkscape:cy="-102.06356"
      inkscape:document-units="in"
      inkscape:current-layer="layer1"
@@ -61,6 +61,6 @@
        inkscape:connector-curvature="0"
        id="path4576"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 206.80375,92.89286 -2.08359,-3.977018 -2.05052,3.977018 h -2.45567 l 3.11713,-5.539713 -2.91042,-5.266862 h 2.38952 l 1.95957,3.762045 1.89342,-3.762045 h 2.38952 l -2.89388,5.266862 3.23288,5.539713 z" />
+       d="m 206.80375,82.086285 -2.08359,3.977018 -2.05052,-3.977018 h -2.45567 l 3.11713,5.539713 -2.91042,5.266862 h 2.38952 l 1.95957,-3.762045 1.89342,3.762045 h 2.38952 l -2.89388,-5.266862 3.23288,-5.539713 z" />
   </g>
 </svg>

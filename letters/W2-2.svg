@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="-310.84493"
-     inkscape:cy="-172.97806"
+     inkscape:zoom="16"
+     inkscape:cx="0.02810393"
+     inkscape:cy="15.155451"
      inkscape:document-units="in"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -61,7 +61,7 @@
        inkscape:connector-curvature="0"
        id="path4574-3"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 195.64035,102.14147 0.37207,1.38906 1.05007,3.29903 h 2.2903 l 0.60358,-10.806582 h -1.79421 l -0.25631,6.928782 -0.0661,1.89342 -0.48782,-1.68672 -1.19063,-3.844727 h -1.28157 z"
+       d="m 195.64035,100.71107 0.37207,-1.389062 1.05007,-3.29903 h 2.2903 l 0.60358,10.806582 h -1.79421 l -0.25631,-6.928782 -0.0661,-1.89342 -0.48782,1.68672 -1.19063,3.844732 h -1.28157 z"
        sodipodi:nodetypes="cccccccccccc" />
   </g>
 </svg>

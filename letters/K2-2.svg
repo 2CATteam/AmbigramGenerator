@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="-317.79254"
+     inkscape:cx="-438.35424"
      inkscape:cy="-69.37479"
      inkscape:document-units="in"
      inkscape:current-layer="layer1"
@@ -59,7 +59,7 @@
      transform="translate(-79.977005,-148.03839)">
     <path
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 79.977006,158.84503 v -10.80658 h 2.067057 v 4.65812 l 0.171051,0.002 3.061825,-4.66018 h 2.455664 l -3.83746,5.36265 -0.662124,1.02526 -0.841171,0.0282 h -0.347785 v 4.39043 z"
+       d="m 79.977006,148.03839 v 10.80658 h 2.067057 v -4.65812 l 0.171051,-0.002 3.061825,4.66018 h 2.455664 l -3.83746,-5.36265 -0.662124,-1.02526 -0.841171,-0.0282 h -0.347785 v -4.39043 z"
        id="path4550-48-1"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccccccc" />

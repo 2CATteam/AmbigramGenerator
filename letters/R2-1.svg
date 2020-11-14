@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -9,37 +7,35 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="7.8383021mm"
-   height="10.806579mm"
-   viewBox="0 0 7.8383021 10.806579"
-   version="1.1"
    id="svg8"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="R2-1.svg">
-  <defs
-     id="defs2" />
+   version="1.1"
+   viewBox="0 0 7.8383021 10.806579"
+   height="10.806579mm"
+   width="7.8383021mm"
+   sodipodi:docname="R2-1.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <sodipodi:namedview
-     id="base"
      pagecolor="#ffffff"
      bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6568543"
-     inkscape:cx="-23.726847"
-     inkscape:cy="-3.2879553"
-     inkscape:document-units="in"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
      inkscape:window-width="1858"
      inkscape:window-height="1057"
+     id="namedview7"
+     showgrid="false"
+     inkscape:zoom="7.2407734"
+     inkscape:cx="8.0981126"
+     inkscape:cy="12.481442"
      inkscape:window-x="54"
      inkscape:window-y="1072"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <defs
+     id="defs2" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -52,16 +48,9 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-145.25506,-82.086285)">
-    <path
-       inkscape:connector-curvature="0"
-       id="path4564"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 147.28905,88.419749 v 4.473111 h -2.03399 V 82.086285 h 3.1502 c 0.59531,0 1.1355,0.05237 1.62057,0.157097 0.48507,0.09922 0.89849,0.267339 1.24024,0.504362 0.34175,0.237023 0.60358,0.545703 0.78548,0.926041 0.18741,0.380339 0.28112,0.846116 0.28112,1.397331 0,0.396875 -0.0579,0.749653 -0.17363,1.058333 -0.11576,0.308681 -0.27837,0.57602 -0.48783,0.802018 -0.20946,0.220487 -0.46026,0.399632 -0.75241,0.537435 -0.28663,0.137804 -0.94258,0.289388 -0.94258,0.289388 -0.91451,0.202033 -1.78888,0.395907 -2.68717,0.661459 z m 2.91042,-3.150195 c 0,-0.529167 -0.16812,-0.909505 -0.50437,-1.141016 -0.33624,-0.231511 -0.8406,-0.347266 -1.51308,-0.347266 h -0.89297 v 3.050977 h 0.82682 c 0.31419,0 0.59807,-0.03307 0.85163,-0.09922 0.25907,-0.06615 0.47956,-0.165365 0.66146,-0.297656 0.1819,-0.132292 0.32246,-0.294901 0.42168,-0.487826 0.0992,-0.198437 0.14883,-0.424435 0.14883,-0.677993 z"
-       sodipodi:nodetypes="ccccscscscccccscsccscccs" />
-  </g>
+  <path
+     d="M 2.034 0 V 4.731 C 2.9323 4.7387 3.8066 4.9325 4.7212 5.1346 C 4.7212 5.1346 5.3771 5.2862 5.6637 5.424 C 5.9559 5.5618 6.2067 5.7409 6.4161 5.9614 C 6.6256 6.1874 6.7882 6.4547 6.904 6.7634 C 7.0197 7.0721 7.0776 7.4249 7.0776 7.8217 C 7.0776 8.373 6.9839 8.8387 6.7965 9.2191 C 6.6146 9.5994 6.3528 9.9081 6.011 10.1451 C 5.6693 10.3821 5.2558 10.5503 4.7708 10.6495 C 4.2857 10.7542 3.7455 10.8066 3.1502 10.8066 H 0 V 0 Z M 2.927 9.116 C 3.5994 9.1116 4.1038 8.9958 4.44 8.7643 C 4.7763 8.5328 4.9444 8.1525 4.9444 7.6233 C 4.9444 7.3698 4.8948 7.1438 4.7956 6.9453 C 4.6964 6.7524 4.5558 6.5898 4.3739 6.4575 C 4.192 6.3252 3.9715 6.226 3.7124 6.1598 C 3.4589 6.0937 3.175 6.0606 2.8608 6.0606 H 2.034 V 9.116 Z"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="path4564"
+     inkscape:connector-curvature="0" />
 </svg>

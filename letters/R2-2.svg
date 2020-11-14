@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2"
-     inkscape:cx="-148.36897"
+     inkscape:cx="-233.61897"
      inkscape:cy="-79.929605"
      inkscape:document-units="in"
      inkscape:current-layer="layer1"
@@ -61,7 +61,7 @@
        inkscape:connector-curvature="0"
        id="path4564-8"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 147.27961,97.717965 v 3.050985 c 0.97134,0.0537 2.42483,0.86909 2.68716,0.92598 0.26873,0.0524 0.50712,0.20672 0.72761,0.45475 0.22049,0.24253 0.44097,0.59531 0.66146,1.05833 l 1.72806,3.62149 -2.38952,5e-5 -1.52136,-3.47266 c -0.14331,-0.33073 -0.34451,-0.57877 -0.60358,-0.74414 -0.25356,-0.17087 -0.55397,-0.25631 -0.90123,-0.25631 h -0.38861 v 4.47311 h -2.03399 V 96.022978 l 2.03878,0.0058"
+       d="M 147.2796 105.1346 V 102.0836 C 148.2509 102.0299 149.7044 101.2145 149.9668 101.1576 C 150.2355 101.1052 150.4739 100.9509 150.6944 100.7028 C 150.9149 100.4603 151.1353 100.1075 151.3558 99.6445 L 153.0839 96.023 L 150.6944 96.023 L 149.173 99.4956 C 149.0297 99.8264 148.8285 100.0744 148.5694 100.2398 C 148.3159 100.4107 148.0155 100.4961 147.6682 100.4961 H 147.2796 V 96.023 H 145.2456 V 106.8296 L 147.2844 106.8236 Z"
        sodipodi:nodetypes="cccccccccsccccc" />
   </g>
 </svg>

@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="-58.547999"
+     inkscape:cx="-179.1097"
      inkscape:cy="-63.036433"
      inkscape:document-units="in"
      inkscape:current-layer="layer1"
@@ -58,9 +58,8 @@
      id="layer1"
      transform="translate(-79.986549,-134.10171)">
     <path
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 356.50781,197.28125 V 238.125 h 7.8125 v -17.60547 h 1.33399 l 10.94726,17.60547 h 9.9375 l -14.59375,-21.375 -2.19381,-2.83081 -4.11673,-0.0442 h -1.31446 v -16.59375 z"
-       transform="matrix(0.26458333,0,0,0.26458333,-14.339474,81.904382)"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 79.98655,144.90828 v -10.80657 h 2.067057 v 4.65811 h 0.352951 l 2.896463,-4.65811 h 2.629297 l -3.861263,5.65547 -0.580446,0.74898 -1.089218,0.0117 h -0.347784 v 4.39043 z"
        id="path4550-48"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccccccc" />
