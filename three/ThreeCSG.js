@@ -1,4 +1,7 @@
 'use strict';
+
+import * as THREE from './three/build/three.module.js'
+
 window.ThreeBSP = (function() {
 	
 	var ThreeBSP,
