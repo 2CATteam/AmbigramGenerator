@@ -55,8 +55,8 @@ async function main() {
     }
 
     //Show axes (For now)
-    const axesHelper = new THREE.AxesHelper(4)
-    scene.add(axesHelper)
+    //const axesHelper = new THREE.AxesHelper(4)
+    //scene.add(axesHelper)
 
     render()
 
