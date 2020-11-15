@@ -55,7 +55,7 @@ async function createModel() {
     while(firstGroups.length > 0) {
         //Get the source and the mask
         let src = firstGroups.shift()
-        let mask = lastGroups.splice(Math.floor(Math.random() * construction.lastGroups.length), 1)[0]
+        let mask = lastGroups.splice(Math.floor(Math.random() * lastGroups.length), 1)[0]
         //Save where they are
         src.updateMatrixWorld()
         mask.updateMatrixWorld()
@@ -66,14 +66,13 @@ async function createModel() {
         
         //Perform operation and convert to meshes
         let result = a.intersect(b)
-        let toAdd = CSG.toMesh(result, mask.matrix)
-        toAdd.material = material
+        let toAdd = CSG.toMesh(result, mask.matrix, material)
 
         //Change out meshes
         console.log("Telling parent to change stuff out")
         postMessage({type: "Del", name: src.name})
-        postMessage({type: "Del", name: base.name})
-        postMessage({type: "Add", geometry: toAdd})
+        postMessage({type: "Del", name: mask.name})
+        postMessage({type: "Add", geometry: toAdd.toJSON()})
     }
 
     material = new THREE.MeshStandardMaterial({
@@ -86,12 +85,11 @@ async function createModel() {
     if (base) {
         const baseGeometry = new THREE.BoxGeometry(construction.firstWidth + 12, 7, construction.lastWidth + 12)
         const base = new THREE.Mesh(baseGeometry, material)
-        postMessage({type: "Add", geometry: base})
+        postMessage({type: "Add", geometry: base.toJSON()})
         base.translateY(-3.5)
     }
 
     postMessage({type: "Done"})
-    console.log("Reported being done")
 }
 
 async function createExtrusion(name, depth, pos, doSide, highQuality=false) {
@@ -133,26 +131,30 @@ async function createExtrusion(name, depth, pos, doSide, highQuality=false) {
                 mesh.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2)
                 mesh.translateX(pos - (construction.lastWidth ? construction.lastWidth : 0) / 2)
                 mesh.translateZ(-depth / 2)
+                postMessage({type: "Add", geometry: mesh.toJSON(), after: {
+                    r: Math.PI / 2,
+                    x: pos - (construction.lastWidth ? construction.lastWidth : 0) / 2,
+                    y: 0,
+                    z: -depth / 2
+                }})
             } else {
                 mesh.translateX(pos - (construction.firstWidth ? construction.firstWidth : 0) / 2)
                 mesh.translateZ(-depth / 2)
+                postMessage({type: "Add", geometry: mesh.toJSON(), after: {
+                    x: pos - (construction.firstWidth ? construction.firstWidth : 0) / 2,
+                    y: 0,
+                    z: -depth / 2
+                }})
             }
-
-            //Add to the group
-            console.log("Telling parent to add block")
-            postMessage({type: "Add", geometry: mesh})
-
+            
             res(mesh)
         })
     })
 }
 
 onmessage = function(m) {
-    console.log("Got message! Yay!")
-    console.log(m.data)
     construction = m.data[0]
     base = m.data[1]
     quality = m.data[2]
-    console.log("Doing generation!")
     createModel()
 }

@@ -3,9 +3,11 @@ import { STLExporter } from './three/examples/jsm/exporters/STLExporter.js'
 import { OrbitControls } from './three/examples/jsm/controls/OrbitControls.js'
 import { letterData } from "./letterData.js"
 
-var camera, controls, scene, renderer, loader
+var camera, controls, scene, renderer
 
 var construction = {}
+
+const loader = new THREE.ObjectLoader()
 
 var worker
 
@@ -243,7 +245,22 @@ async function doGenerate() {
     worker.onmessage = (msg) => {
         //Add returned geometry
         if (msg.data.type == "Add") {
-            scene.add(msg.data.geometry)
+            var adding = loader.parse(msg.data.geometry)
+            scene.add(adding)
+            if (msg.data.after) {
+                if (msg.data.after.r) {
+                    adding.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), msg.data.after.r)
+                }
+                if (msg.data.after.x) {
+                    adding.translateX(msg.data.after.x)
+                }
+                if (msg.data.after.y) {
+                    adding.translateY(msg.data.after.y)
+                }
+                if (msg.data.after.z) {
+                    adding.translateZ(msg.data.after.z)
+                }
+            }
         //Remove specified geometry
         } else if (msg.data.type == "Del") {
             var toRemove = scene.getObjectByName(msg.data.name)

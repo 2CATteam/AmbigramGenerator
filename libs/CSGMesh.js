@@ -435,7 +435,7 @@ CSG.fromMesh=function(mesh){
     return csg;
 }
 
-CSG.toMesh=function(csg,toMatrix){
+CSG.toMesh=function(csg, toMatrix, material){
     var geom = new THREE.Geometry();
     var ps = csg.polygons;
     var vs = geom.vertices;
@@ -475,7 +475,8 @@ CSG.toMesh=function(csg,toMatrix){
     geom.verticesNeedUpdate = geom.elementsNeedUpdate = geom.normalsNeedUpdate = true;
     geom.computeBoundingSphere();
     geom.computeBoundingBox();
-    var m = new THREE.Mesh(geom);
+	var buffGeom = new THREE.BufferGeometry().fromGeometry(geom)
+    var m = new THREE.Mesh(buffGeom, material);
     m.matrix.copy(toMatrix);
     m.matrix.decompose(m.position,m.rotation,m.scale)
     m.updateMatrixWorld();
