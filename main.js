@@ -342,6 +342,7 @@ async function doGenerate() {
         //base.translateZ(construction.lastWidth / 2)
         render()
     }
+    generating = false
     $("#generate").text("Generate!")
 }
 
