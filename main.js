@@ -405,6 +405,7 @@ async function createExtrusion(name, depth, pos, doSide, highQuality=false) {
     })
 }
 
+//Stops the generation process and changes out flags
 function killCheck() {
     if (kill) {
         generating = false
@@ -413,12 +414,14 @@ function killCheck() {
     }
 }
 
+//Animation loop
 function animate() {
     requestAnimationFrame(animate)
     controls.update()
     render()
 }
 
+//Handles changing canvas size
 function onWindowResize(){
     const canvas = document.querySelector('#c')
     const aspectRatio = canvas.height / canvas.width;
@@ -429,28 +432,40 @@ function onWindowResize(){
     render()
 }
 
+//Render scene
 function render() {
     renderer.render(scene, camera)
 }
 
+//Sleep function
 async function sleep(millis) {
     return new Promise((res, rej) => {
         setTimeout(res, millis)
     })
 }
 
+//On ready
 $(document).ready(() => {
+    //Allow resizing to work
     window.addEventListener('resize', onWindowResize, false);
+
+    //Enable download button
     $("#download").click(() => {
         download()
     })
+
+    //Enable generate button
     $("#generate").click(() => {
+        //If running, kill
         if (generating) {
             kill = true
         } else {
+            //Else, generate
             doGenerate().catch(console.error)
         }
     })
+
+    //Enable camera buttons
     $("#isoCam").click(() => {
         setCameraIso()
     })
@@ -460,6 +475,8 @@ $(document).ready(() => {
     $("#firstCam").click(() => {
         setCameraFirst()
     })
+
+    //Enable rotation
     $("#rotate").change(() => {
         console.log("Changed")
         if($("#rotate:checked").length > 0) {
