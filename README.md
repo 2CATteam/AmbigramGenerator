@@ -16,6 +16,10 @@ This generator aims to add just one more layer of complexity to that idea. I've 
 
 The tool uses an orthographic camera when displaying the files, rather than a perspective-based one. This means that, the further you are from your model, the closer your model will look to what the tool shows. In my experience, most models look fine from an arm's length away or more. 
 
+#### What are the limitations of this software?
+
+As noted above, it cannot generate for a particular perspective. It also currently only supports letters and spaces. I may add number support later if someone asks for it, IDK. The SVG files are kinda the hardest part.
+
 #### Why doesn't this tool support <feature>?
 
 Primarily because I slapped this together in a weekend for fun. If you have something you want me to add, though, please let me know and I'll look into it! Better yet, if you want to add the feature yourself, I'm always open to pull requests!
