@@ -370,7 +370,7 @@ async function createExtrusion(name, depth, pos, doSide, highQuality=false) {
 
             //Get this path and make it shapes
             const path = paths[0]
-            const shapes = path.toShapes(true);
+            const shapes = path.toShapes((name == "R1-1" ? false : true));
 
             //Material settings
             const material = new THREE.MeshPhongMaterial({

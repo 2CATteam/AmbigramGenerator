@@ -29,9 +29,10 @@ for data in arr:
                 adding[2] = adding[4]
                 adding[3] = a
                 adding[4] = b
-                if (len(stack[0]) >= 7):
-                    adding[5] = stack[0][5]
-                    adding[6] = stack[0][6]
+                if (len(stack) > 0):
+                    if (len(stack[0]) >= 7):
+                        adding[5] = stack[0][5]
+                        adding[6] = stack[0][6]
             if (adding[0] == "Q"):
                 #a, b = adding[1], adding[2]
                 #adding[1] = adding[3]
