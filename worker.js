@@ -1,5 +1,13 @@
-//Needs to know construction
-importScripts('./three/build/three.min.js', './three/examples/js/loaders/SVGLoader.js', './CSGMesh.js', './seedrandom.js')
+importScripts('./libs/seedrandom.js')
+importScripts('./libs/domparser_bundle.js')
+var DOMParser = xmldom.DOMParser
+importScripts('./three/build/three.js')
+importScripts('./libs/CSGMesh.js')
+importScripts('./three/examples/js/loaders/SVGLoader.js')
+
+console.log(THREE)
+
+console.log(THREE.SVGLoader)
 
 var loader = new THREE.SVGLoader()
 

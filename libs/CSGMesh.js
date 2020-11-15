@@ -10,8 +10,6 @@
 // Holds a binary space partition tree representing a 3D solid. Two solids can
 // be combined using the `union()`, `subtract()`, and `intersect()` methods.
 
-import * as THREE from './three/build/three.module.js'
-
 class CSG {
     constructor() {
         this.polygons = [];
@@ -515,7 +513,6 @@ CSG.eval=function(tokens,doRemove){//[['add',mesh,mesh,mesh,mesh],['sub',mesh,me
     return result;
 }
 
-export default CSG
 // Return a new CSG solid representing space in either this solid or in the
 // solid `csg`. Neither this solid nor the solid `csg` are modified.
 // 

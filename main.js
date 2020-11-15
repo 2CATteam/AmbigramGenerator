@@ -57,9 +57,6 @@ async function main() {
 
     render()
 
-    //Initialize loader
-    loader = new SVGLoader()
-
     //await createExtrusion("L1-1", 5, 0, false)
     //render()
 
@@ -243,7 +240,7 @@ async function doGenerate() {
         worker.terminate()
     }
     worker = new Worker('./worker.js')
-    worker.onmessage((msg) => {
+    worker.onmessage = (msg) => {
         //Add returned geometry
         if (msg.data.type == "Add") {
             scene.add(msg.data.geometry)
@@ -257,8 +254,8 @@ async function doGenerate() {
             worker = undefined
             $("#generate").text("Generate!")
         }
-    })
-    
+    }
+
     worker.postMessage([construction, $("#base:checked").length > 0, $("#quality:checked").length > 0])
 }
 
