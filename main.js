@@ -429,12 +429,29 @@ function onWindowResize(){
     camera.top = (camera.right - camera.left) * aspectRatio / 2
     camera.bottom = (camera.right - camera.left) * aspectRatio / -2
     camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize( window.innerWidth, window.innerHeight, false);
     render()
+}
+
+function resizeCanvasToDisplaySize() {
+    const canvas = renderer.domElement;
+    // look up the size the canvas is being displayed
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+  
+    // adjust displayBuffer size to match
+    if (canvas.width !== width || canvas.height !== height) {
+        // you must pass false here or three.js sadly fights the browser
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        // update any render target sizes here
+    }
 }
 
 //Render scene
 function render() {
+    resizeCanvasToDisplaySize()
     renderer.render(scene, camera)
 }
 
