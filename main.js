@@ -1,6 +1,4 @@
 import * as THREE from './three/build/three.module.js'
-import CSG from './CSGMesh.js'
-import { SVGLoader } from './three/examples/jsm/loaders/SVGLoader.js'
 import { STLExporter } from './three/examples/jsm/exporters/STLExporter.js'
 import { OrbitControls } from './three/examples/jsm/controls/OrbitControls.js'
 import { letterData } from "./letterData.js"
@@ -9,8 +7,7 @@ var camera, controls, scene, renderer, loader
 
 var construction = {}
 
-var generating = false
-var kill = false
+var worker
 
 //Loads on page ready
 async function main() {
@@ -67,11 +64,9 @@ async function main() {
     //render()
 
     //Initial generation
-    doGenerate().catch(console.error)
-
-    //Done
+    doGenerate()
 }
-
+//Nice
 function setCameraIso() {
     //Get aspect ratio
     var size = new THREE.Vector2()
@@ -185,8 +180,6 @@ function sumScore(key) {
 
 //Do the actual generating
 async function doGenerate() {
-    generating = true
-    kill = false
     $("#generate").text("Stop generating")
 
     //Delete all children
@@ -195,8 +188,6 @@ async function doGenerate() {
             scene.remove(scene.children[i])
         }
     }
-
-    killCheck()
 
     //Get word values, set them, and reposition camera
     var first = $("#first").val()
@@ -208,12 +199,10 @@ async function doGenerate() {
     setCameraIso()
     render()
 
-    killCheck()
-
     //If the first is too complex, simplify it
     var override = false
     while (sumScore("first") > sumScore("last")) {
-        killCheck()
+        
         if (!simplify("first", override)) {
             if (override) {
                 break
@@ -227,7 +216,6 @@ async function doGenerate() {
     }
     //If the second is too complex, simplify it.
     while (sumScore("first") < sumScore("last")) {
-        killCheck()
         if (!simplify("last", override)) {
             if (override) {
                 break
@@ -250,100 +238,28 @@ async function doGenerate() {
         return
     }
 
-    killCheck()
-
-    //Build the first set of meshes
-    construction.firstGroups = []
-    for (var i in construction.first) {
-        //Get the number of profiles to make
-        var profiles = construction.first[i].profiles
-        //Make each profile and add it to the array
-        for (var j = 1; j <= profiles; j++) {
-            killCheck()
-            let obj = await createExtrusion(construction.first[i].letter + profiles + "-" + j,
-                construction.lastWidth, construction.first[i].pos, false, $("#quality:checked").length > 0)
-            construction.firstGroups.push(obj)
+    //Call worker
+    if (worker) {
+        worker.terminate()
+    }
+    worker = new Worker('./worker.js')
+    worker.onmessage((msg) => {
+        //Add returned geometry
+        if (msg.data.type == "Add") {
+            scene.add(msg.data.geometry)
+        //Remove specified geometry
+        } else if (msg.data.type == "Del") {
+            var toRemove = scene.getObjectByName(msg.data.name)
+            scene.remove(toRemove)
+        //Allow for finished
+        } else if (msg.data.type == "Done") {
+            worker.terminate()
+            worker = undefined
+            $("#generate").text("Generate!")
         }
-    }
-
-    //Build the second set of meshes
-    construction.lastGroups = []
-    for (var i in construction.last) {
-        //Get the number of profiles to make
-        var profiles = construction.last[i].profiles
-        //Make each profile and add it to the array
-        for (var j = 1; j <= profiles; j++) {
-            killCheck()
-            let obj = await createExtrusion(construction.last[i].letter + profiles + "-" + j,
-                construction.firstWidth, construction.last[i].pos, true, $("#quality:checked").length > 0)
-            construction.lastGroups.push(obj)
-        }
-    }
-
-    //Allow last piece to be rendered
-    await sleep(1)
-
-    //Material for final shapes
-    let material = new THREE.MeshStandardMaterial({
-        color: 0x2150CE,
-        side: THREE.FrontSide,
-        roughness: 0.9,
-        emissive: 0x0f0f0f
     })
-
-    //Seed so that you can get the same result each time
-    Math.seedrandom(construction.first + construction.last)
-
-    //Perform intersects
-    while(construction.firstGroups.length > 0) {
-        //Get the source and the mask
-        let src = construction.firstGroups.shift()
-        let mask = construction.lastGroups.splice(Math.floor(Math.random() * construction.lastGroups.length), 1)[0]
-        //Save where they are
-        src.updateMatrixWorld()
-        mask.updateMatrixWorld()
-        
-        //Convert to BSP
-        killCheck()
-        let a = CSG.fromMesh(src)
-        killCheck()
-        let b = CSG.fromMesh(mask)
-        killCheck()
-
-        //Perform operation and convert to meshes
-        let result = a.intersect(b)
-        killCheck()
-        let toAdd = CSG.toMesh(result, mask.matrix)
-        toAdd.material = material
-
-        //Change out meshes
-        scene.remove(src)
-        scene.remove(mask)
-        scene.add(toAdd)
-        render()
-        await sleep(1)
-    }
-
-    material = new THREE.MeshStandardMaterial({
-        color: 0x11207E,
-        side: THREE.FrontSide,
-        roughness: 0.9,
-        emissive: 0x0f0f0f
-    })
-
-    killCheck()
-
-    if ($("#base:checked").length > 0) {
-        const baseGeometry = new THREE.BoxGeometry(construction.firstWidth + 12, 7, construction.lastWidth + 12)
-        const base = new THREE.Mesh(baseGeometry, material)
-        scene.add(base)
-        //base.translateX(construction.firstWidth / 2)
-        base.translateY(-3.5)
-        //base.translateZ(construction.lastWidth / 2)
-        render()
-    }
-    generating = false
-    $("#generate").text("Generate!")
+    
+    worker.postMessage([construction, $("#base:checked").length > 0, $("#quality:checked").length > 0])
 }
 
 function download() {
@@ -402,15 +318,6 @@ async function createExtrusion(name, depth, pos, doSide, highQuality=false) {
             res(mesh)
         })
     })
-}
-
-//Stops the generation process and changes out flags
-function killCheck() {
-    if (kill) {
-        generating = false
-        $("#generate").text("Generate!")
-        throw "STOP!"
-    }
 }
 
 //Animation loop
@@ -472,11 +379,13 @@ $(document).ready(() => {
     //Enable generate button
     $("#generate").click(() => {
         //If running, kill
-        if (generating) {
-            kill = true
+        if (worker) {
+            worker.terminate()
+            worker = undefined
+            $("#generate").text("Generate!")
         } else {
             //Else, generate
-            doGenerate().catch(console.error)
+            doGenerate()
         }
     })
 
