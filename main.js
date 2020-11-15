@@ -9,6 +9,9 @@ var camera, controls, scene, renderer, loader
 
 var construction = {}
 
+var generating = false
+var kill = false
+
 //Loads on page ready
 async function main() {
     //Set up renderer
@@ -64,7 +67,7 @@ async function main() {
     //render()
 
     //Initial generation
-    doGenerate()
+    doGenerate().catch(console.error)
 
     //Done
 }
@@ -182,12 +185,20 @@ function sumScore(key) {
 
 //Do the actual generating
 async function doGenerate() {
-    //console.log(scene)
+    generating = true
+    kill = false
+    $("#generate").text("Stop generating")
+
+    //Delete all children
     for (var i = scene.children.length - 1; i >= 0; i--) {
         if (scene.children[i] instanceof THREE.Mesh) {
             scene.remove(scene.children[i])
         }
     }
+
+    killCheck()
+
+    //Get word values, set them, and reposition camera
     var first = $("#first").val()
     if (!first) first = "Default"
     setWord("first", first)
@@ -197,8 +208,12 @@ async function doGenerate() {
     setCameraIso()
     render()
 
+    killCheck()
+
+    //If the first is too complex, simplify it
     var override = false
     while (sumScore("first") > sumScore("last")) {
+        killCheck()
         if (!simplify("first", override)) {
             if (override) {
                 break
@@ -210,7 +225,9 @@ async function doGenerate() {
             }
         }
     }
+    //If the second is too complex, simplify it.
     while (sumScore("first") < sumScore("last")) {
+        killCheck()
         if (!simplify("last", override)) {
             if (override) {
                 break
@@ -222,35 +239,51 @@ async function doGenerate() {
             }
         }
     }
+
+    //Print profile number
     console.log(`Sum of first profiles: ${sumScore("first")}`)
     console.log(`Sum of last profiles: ${sumScore("last")}`)
+
+    //Die if there is no solution
     if (sumScore("first") != sumScore("last")) {
         alert("The generation cannot continue. Please choose different words.")
         return
     }
 
+    killCheck()
+
+    //Build the first set of meshes
     construction.firstGroups = []
     for (var i in construction.first) {
+        //Get the number of profiles to make
         var profiles = construction.first[i].profiles
+        //Make each profile and add it to the array
         for (var j = 1; j <= profiles; j++) {
+            killCheck()
             let obj = await createExtrusion(construction.first[i].letter + profiles + "-" + j,
                 construction.lastWidth, construction.first[i].pos, false, $("#quality:checked").length > 0)
             construction.firstGroups.push(obj)
         }
     }
 
+    //Build the second set of meshes
     construction.lastGroups = []
     for (var i in construction.last) {
+        //Get the number of profiles to make
         var profiles = construction.last[i].profiles
+        //Make each profile and add it to the array
         for (var j = 1; j <= profiles; j++) {
+            killCheck()
             let obj = await createExtrusion(construction.last[i].letter + profiles + "-" + j,
                 construction.firstWidth, construction.last[i].pos, true, $("#quality:checked").length > 0)
             construction.lastGroups.push(obj)
         }
     }
 
+    //Allow last piece to be rendered
     await sleep(1)
 
+    //Material for final shapes
     var material = new THREE.MeshStandardMaterial({
         color: 0x2150CE,
         side: THREE.FrontSide,
@@ -258,17 +291,32 @@ async function doGenerate() {
         emissive: 0x0f0f0f
     })
 
+    //Seed so that you can get the same result each time
     Math.seedrandom(construction.first + construction.last)
+
+    //Perform intersects
     while(construction.firstGroups.length > 0) {
+        //Get the source and the mask
         var src = construction.firstGroups.shift()
         var mask = construction.lastGroups.splice(Math.floor(Math.random() * construction.lastGroups.length), 1)[0]
+        //Save where they are
         src.updateMatrixWorld()
         mask.updateMatrixWorld()
+        
+        //Convert to BSP
+        killCheck()
         var a = CSG.fromMesh(src)
+        killCheck()
         var b = CSG.fromMesh(mask)
+        killCheck()
+
+        //Perform operation and convert to meshes
         var result = a.intersect(b)
+        killCheck()
         var toAdd = CSG.toMesh(result, mask.matrix)
         toAdd.material = material
+
+        //Change out meshes
         scene.remove(src)
         scene.remove(mask)
         scene.add(toAdd)
@@ -283,6 +331,8 @@ async function doGenerate() {
         emissive: 0x0f0f0f
     })
 
+    killCheck()
+
     if ($("#base:checked").length > 0) {
         const baseGeometry = new THREE.BoxGeometry(construction.firstWidth + 12, 7, construction.lastWidth + 12)
         const base = new THREE.Mesh(baseGeometry, material)
@@ -292,6 +342,7 @@ async function doGenerate() {
         //base.translateZ(construction.lastWidth / 2)
         render()
     }
+    $("#generate").text("Generate!")
 }
 
 function download() {
@@ -354,6 +405,14 @@ async function createExtrusion(name, depth, pos, doSide, highQuality=false) {
     })
 }
 
+function killCheck() {
+    if (kill) {
+        generating = false
+        $("#generate").text("Generate!")
+        throw "STOP!"
+    }
+}
+
 function animate() {
     requestAnimationFrame(animate)
     controls.update()
@@ -386,7 +445,11 @@ $(document).ready(() => {
         download()
     })
     $("#generate").click(() => {
-        doGenerate()
+        if (generating) {
+            kill = true
+        } else {
+            doGenerate().catch(console.error)
+        }
     })
     $("#isoCam").click(() => {
         setCameraIso()
