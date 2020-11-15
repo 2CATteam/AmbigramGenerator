@@ -56,11 +56,11 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-97.927727,-82.086285)">
+    transform="translate(-244.8193175,-205.2157125)">
     <path
        inkscape:connector-curvature="0"
        id="path4554"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 104.6994,82.086285 -0.19844,6.110221 -0.0744,2.439127 -0.5209,-1.653646 -1.19889,-3.679361 h -1.27331 l -1.08314,3.679361 -0.454751,1.653646 -0.05788,-2.389518 -0.181901,-6.15983 h -1.72806 l 0.529167,10.806575 h 2.298575 l 0.95084,-3.067513 0.45475,-1.72806 0.45476,1.628841 1.00045,3.166732 h 2.33991 l 0.53744,-10.806575 z" />
+		d="m 261.7485 205.2157125 -0.4961 15.2755525 -0.186 6.0978175 -1.3022500000000001 -4.1341149999999995 -2.9972250000000003 -9.1984025 h -3.183275 l -2.70785 9.1984025 -1.1368775 4.1341149999999995 -0.1447 -5.973794999999999 -0.4547525 -15.399575 h -4.32015 l 1.3229175000000002 27.016437500000002 h 5.7464375 l 2.3771 -7.6687825 1.1368749999999999 -4.32015 1.1369 4.0721025 2.501125 7.91683 h 5.849775 l 1.3436000000000001 -27.016437500000002 z" /> 
   </g>
 </svg>

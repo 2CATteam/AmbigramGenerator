@@ -56,11 +56,11 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-163.5192,-148.03846)">
+    transform="translate(-408.798,-370.09614999999997)">
     <path
        inkscape:connector-curvature="0"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 171.50631,158.84504 v -1.69499 h -2.96003 v -9.11159 h -2.08359 v 9.11159 1.69499 z"
+		d="m 428.765775 397.11260000000004 v -4.237475 h -7.400075 v -22.778975 h -5.208975000000001 v 22.778975 4.237475 z" 
        id="path4568-7-3" />
   </g>
 </svg>

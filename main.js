@@ -24,7 +24,7 @@ async function main() {
     renderer.getSize(size)
     const aspectRatio = size.y / size.x
     const width = 300
-    camera = new THREE.OrthographicCamera(width / -2 + 40, width / 2 + 40, width / 2 * aspectRatio, width / -2 * aspectRatio, 0.01, 1000);
+    camera = new THREE.OrthographicCamera(width / -2 + 40, width / 2 + 40, width / 2 * aspectRatio, width / -2 * aspectRatio, 0.01, 10000);
     camera.position.x = 40
     camera.position.y = 40
     camera.position.z = 40
@@ -40,55 +40,80 @@ async function main() {
     const ambient = new THREE.AmbientLight(0x101010)
     scene.add(ambient)
     for (var i = 0; i < 10; i++) {
-        var light1 = new THREE.PointLight(0xffffff, .12, 0, 2)
-        light1.position.set(-300 + 100 * i, 800, 500)
+        var light1 = new THREE.PointLight(0xffffff, .08, 0, 2)
+        light1.position.set(-300 + 100 * i, 300, 500)
         scene.add(light1)
-        const light2 = new THREE.PointLight(0xffcccc, .06, 0, 2)
-        light2.position.set(2000, 300, -300 - 100 * i)
+        const light2 = new THREE.PointLight(0xffcccc, .12, 0, 2)
+        light2.position.set(2000, 400, -300 - 100 * i)
         scene.add(light2)
     }
 
     //Show axes (For now)
-    //const axesHelper = new THREE.AxesHelper(4)
-    //scene.add(axesHelper)
+    const axesHelper = new THREE.AxesHelper(4)
+    scene.add(axesHelper)
 
     render()
 
     //Initialize loader
     loader = new SVGLoader()
 
-    //Print width of each letter
-    // var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    // for (var i = 0; i < str.length; i++) {
-    //     await createLetter(str[i])
-    // }
-    // console.log(JSON.stringify(letterData, null, "\t"))
-
-    //await createExtrusion("D2-2", 5, 0, false)
+    //await createExtrusion("L1-1", 5, 0, false)
+    //render()
 
     //Initial generation
-    setWord("first", "Daniel")
-    setWord("last", "Royer")
-    setCamera()
-    render()
     doGenerate()
 
     //Done
 }
 
-function setCamera() {
+function setCameraIso() {
     //Get aspect ratio
     var size = new THREE.Vector2()
     renderer.getSize(size)
     const aspectRatio = size.y / size.x
     //Set position
-    camera.position.x = Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.firstWidth / 2
+    camera.position.x = Math.max(construction.firstWidth, construction.lastWidth) * 1.5
     camera.position.y = Math.max(construction.firstWidth, construction.lastWidth) * 1.5
-    camera.position.z = Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.lastWidth / 2
-    camera.left = Math.max(construction.firstWidth, construction.lastWidth) * -0.2
-    camera.right = Math.max(construction.firstWidth, construction.lastWidth) * 1.4
-    camera.top = (camera.right - camera.left) * aspectRatio / 2// + (camera.right - camera.left) / 3
-    camera.bottom = (camera.right - camera.left) * aspectRatio / -2//  + (camera.right - camera.left) / 3
+    camera.position.z = Math.max(construction.firstWidth, construction.lastWidth) * 1.5
+    camera.left = Math.hypot(construction.firstWidth, construction.lastWidth) * -0.7
+    camera.right = Math.hypot(construction.firstWidth, construction.lastWidth) * 0.7
+    camera.top = (camera.right - camera.left) * aspectRatio / 2 + 10
+    camera.bottom = (camera.right - camera.left) * aspectRatio / -2 + 10
+    camera.updateProjectionMatrix()
+    controls.update()
+    render()
+}
+
+function setCameraFirst() {
+    //Get aspect ratio
+    var size = new THREE.Vector2()
+    renderer.getSize(size)
+    const aspectRatio = size.y / size.x
+    //Set position
+    camera.position.set(0, 0, 
+        Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.lastWidth / 2)
+    camera.left = construction.firstWidth * -0.6
+    camera.right = construction.firstWidth * 0.6
+    camera.top = (camera.right - camera.left) * aspectRatio / 2 + 10
+    camera.bottom = (camera.right - camera.left) * aspectRatio / -2 + 10
+    camera.updateProjectionMatrix()
+    controls.update()
+    render()
+}
+
+function setCameraLast() {
+    //Get aspect ratio
+    var size = new THREE.Vector2()
+    renderer.getSize(size)
+    const aspectRatio = size.y / size.x
+    //Set position
+    camera.position.x = Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.lastWidth / 2
+    camera.position.y = 0
+    camera.position.z = 0
+    camera.left = construction.lastWidth * -0.6
+    camera.right = construction.lastWidth * 0.6
+    camera.top = (camera.right - camera.left) * aspectRatio / 2 + 10
+    camera.bottom = (camera.right - camera.left) * aspectRatio / -2 + 10
     camera.updateProjectionMatrix()
     controls.update()
     render()
@@ -153,7 +178,22 @@ function sumScore(key) {
 }
 
 //Do the actual generating
-async function doGenerate(first, last) {
+async function doGenerate() {
+    //console.log(scene)
+    for (var i = scene.children.length - 1; i >= 0; i--) {
+        if (scene.children[i] instanceof THREE.Mesh) {
+            scene.remove(scene.children[i])
+        }
+    }
+    var first = $("#first").val()
+    if (!first) first = "Default"
+    setWord("first", first)
+    var last = $("#last").val()
+    if (!last) last = "Example"
+    setWord("last", last)
+    setCameraIso()
+    render()
+
     var override = false
     while (sumScore("first") > sumScore("last")) {
         if (!simplify("first", override)) {
@@ -190,7 +230,8 @@ async function doGenerate(first, last) {
     for (var i in construction.first) {
         var profiles = construction.first[i].profiles
         for (var j = 1; j <= profiles; j++) {
-            let obj = await createExtrusion(construction.first[i].letter + profiles + "-" + j, construction.lastWidth, construction.first[i].pos, false)
+            let obj = await createExtrusion(construction.first[i].letter + profiles + "-" + j,
+                construction.lastWidth, construction.first[i].pos, false, $("#quality:checked").length > 0)
             construction.firstGroups.push(obj)
         }
     }
@@ -199,14 +240,15 @@ async function doGenerate(first, last) {
     for (var i in construction.last) {
         var profiles = construction.last[i].profiles
         for (var j = 1; j <= profiles; j++) {
-            let obj = await createExtrusion(construction.last[i].letter + profiles + "-" + j, construction.firstWidth, construction.last[i].pos, true)
+            let obj = await createExtrusion(construction.last[i].letter + profiles + "-" + j,
+                construction.firstWidth, construction.last[i].pos, true, $("#quality:checked").length > 0)
             construction.lastGroups.push(obj)
         }
     }
 
     await sleep(1)
 
-    const material = new THREE.MeshStandardMaterial({
+    var material = new THREE.MeshStandardMaterial({
         color: 0x2150CE,
         side: THREE.FrontSide,
         roughness: 0.9,
@@ -231,7 +273,22 @@ async function doGenerate(first, last) {
         await sleep(1)
     }
 
-    //download()
+    material = new THREE.MeshStandardMaterial({
+        color: 0x11207E,
+        side: THREE.FrontSide,
+        roughness: 0.9,
+        emissive: 0x0f0f0f
+    })
+
+    if ($("#base:checked").length > 0) {
+        const baseGeometry = new THREE.BoxGeometry(construction.firstWidth + 12, 7, construction.lastWidth + 12)
+        const base = new THREE.Mesh(baseGeometry, material)
+        scene.add(base)
+        //base.translateX(construction.firstWidth / 2)
+        base.translateY(-3.5)
+        //base.translateZ(construction.lastWidth / 2)
+        render()
+    }
 }
 
 function download() {
@@ -241,7 +298,7 @@ function download() {
     saveAs(blob, `${construction.firstWord}${construction.lastWord}.stl`)
 }
 
-async function createExtrusion(name, depth, pos, doSide) {
+async function createExtrusion(name, depth, pos, doSide, highQuality=false) {
     return new Promise((res, rej) => {
         name = "./letters/" + name + ".svg"
         loader.load(name, async (data) => {
@@ -251,9 +308,9 @@ async function createExtrusion(name, depth, pos, doSide) {
             group.name = name + pos + doSide
             //Extrusion settings
             const extrudeSettings = {
-                curveSegments: 30,
+                curveSegments: highQuality ? 30 : 7,
                 bevelEnabled: false,
-                steps: 40,
+                steps: 20,
                 depth: depth
             }
 
@@ -265,8 +322,10 @@ async function createExtrusion(name, depth, pos, doSide) {
             const material = new THREE.MeshPhongMaterial({
                 color: (doSide ? 0x500000 : 0x005000),
                 side: THREE.FrontSide,
-                roughness: .95,
-                //emissive: 0x0f0f0f
+                //wireframe: true,
+                transparent: true,
+                opacity: .7,
+                emissive: 0x0f0f0f
             })
 
             //Make each shape a mesh
@@ -280,11 +339,11 @@ async function createExtrusion(name, depth, pos, doSide) {
 
             if (doSide) {
                 mesh.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2)
-                mesh.translateX(pos)
-                //mesh.translateZ(-depth)
+                mesh.translateX(pos - (construction.lastWidth ? construction.lastWidth : 0) / 2)
+                mesh.translateZ(-depth / 2)
             } else {
-                mesh.translateX(pos)
-                mesh.translateZ(-depth)
+                mesh.translateX(pos - (construction.firstWidth ? construction.firstWidth : 0) / 2)
+                mesh.translateZ(-depth / 2)
             }
             render()
             res(mesh)
@@ -298,6 +357,16 @@ function animate() {
     render()
 }
 
+function onWindowResize(){
+    const canvas = document.querySelector('#c')
+    const aspectRatio = canvas.height / canvas.width;
+    camera.top = (camera.right - camera.left) * aspectRatio / 2
+    camera.bottom = (camera.right - camera.left) * aspectRatio / -2
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    render()
+}
+
 function render() {
     renderer.render(scene, camera)
 }
@@ -308,4 +377,35 @@ async function sleep(millis) {
     })
 }
 
+$(document).ready(() => {
+    window.addEventListener('resize', onWindowResize, false);
+    $("#download").click(() => {
+        download()
+    })
+    $("#generate").click(() => {
+        doGenerate()
+    })
+    $("#isoCam").click(() => {
+        setCameraIso()
+    })
+    $("#lastCam").click(() => {
+        setCameraLast()
+    })
+    $("#firstCam").click(() => {
+        setCameraFirst()
+    })
+    $("#rotate").change(() => {
+        console.log("Changed")
+        if($("#rotate:checked").length > 0) {
+            console.log("Rotating")
+            controls.autoRotate = true
+            controls.autoRotateSpeed = 4
+        } else {
+            console.log("Not rotating")
+            controls.autoRotate = false
+        }
+    })
+})
+
 main()
+animate()

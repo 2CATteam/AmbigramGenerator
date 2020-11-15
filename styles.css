@@ -1,0 +1,44 @@
+#commandBlock {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-width: 1px;
+    height: fit-content;
+    width: fit-content;
+    padding: 15px;
+    background-color: #111111;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#moreOptions {
+    width: 100%;
+}
+
+#viewDiv {
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-width: 1px;
+    padding: 7px;
+}
+
+p, label {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFFFFF
+}
+
+label {
+    font-size: 9pt;
+    word-wrap: normal;
+}
+
+p {
+    font-size: 11pt;
+}
+
+.flexChild {
+    margin: 3px;
+}
