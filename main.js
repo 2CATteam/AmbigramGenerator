@@ -363,7 +363,7 @@ async function createExtrusion(name, depth, pos, doSide, highQuality=false) {
             const extrudeSettings = {
                 curveSegments: highQuality ? 30 : 7,
                 bevelEnabled: false,
-                steps: 20,
+                steps: 2,
                 depth: depth
             }
 
