@@ -5,10 +5,6 @@ importScripts('./three/build/three.js')
 importScripts('./libs/CSGMesh.js')
 importScripts('./three/examples/js/loaders/SVGLoader.js')
 
-console.log(THREE)
-
-console.log(THREE.SVGLoader)
-
 var loader = new THREE.SVGLoader()
 
 var construction, quality, base
@@ -69,7 +65,6 @@ async function createModel() {
         let toAdd = CSG.toMesh(result, mask.matrix, material)
 
         //Change out meshes
-        console.log("Telling parent to change stuff out")
         postMessage({type: "Del", name: src.name})
         postMessage({type: "Del", name: mask.name})
         postMessage({type: "Add", geometry: toAdd.toJSON()})
