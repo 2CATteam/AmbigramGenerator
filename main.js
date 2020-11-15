@@ -442,9 +442,7 @@ function resizeCanvasToDisplaySize() {
     // adjust displayBuffer size to match
     if (canvas.width !== width || canvas.height !== height) {
         // you must pass false here or three.js sadly fights the browser
-        renderer.setSize(width, height, false);
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
+        onWindowResize()
         // update any render target sizes here
     }
 }
