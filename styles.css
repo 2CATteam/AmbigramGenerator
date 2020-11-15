@@ -1,17 +1,40 @@
-#commandBlock {
+#parentBlock {
     position: fixed;
     right: 0;
     bottom: 0;
     border-style: solid;
     border-color: #FFFFFF;
     border-width: 1px;
+    padding: 15px;
     height: fit-content;
     width: fit-content;
-    padding: 15px;
+}
+
+.commandBlock {
+    height: 100%;
+    width: 100%;
     background-color: #111111;
     display: flex;
     flex-direction: column;
     align-items: stretch;
+}
+
+@media only screen and (orientation: portrait) {
+    #parentBlock {
+        position: fixed;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        border-style: solid;
+        border-color: #FFFFFF;
+        border-width: 1px;
+        padding: 15px;
+        height: fit-content;
+        flex-direction: row;
+    }
+    .commandBlock {
+        height: 100%;
+    }
 }
 
 #moreOptions {
@@ -23,6 +46,16 @@
     border-color: #FFFFFF;
     border-width: 1px;
     padding: 7px;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.viewButton {
+    margin: 2px;
 }
 
 p, label {
