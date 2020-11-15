@@ -465,7 +465,8 @@ async function sleep(millis) {
 //On ready
 $(document).ready(() => {
     //Allow resizing to work
-    window.addEventListener('resize', onWindowResize, false);
+    $(window).resize(onWindowResize);
+    //window.addEventListener('resize', onWindowResize, false);
 
     //Enable download button
     $("#download").click(() => {
