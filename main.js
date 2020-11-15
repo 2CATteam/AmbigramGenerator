@@ -16,7 +16,10 @@ async function main() {
     const style = getComputedStyle(document.querySelector('body'))
     canvas.width = parseInt(style.getPropertyValue('width'))
     canvas.height = parseInt(style.getPropertyValue('height'))
-    renderer = new THREE.WebGLRenderer({canvas})
+    renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        logarithmicDepthBuffer: true
+    })
     renderer.setClearColor(0x121212)
 
     //Set up camera
