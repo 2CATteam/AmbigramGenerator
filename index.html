@@ -20,28 +20,32 @@
             <input type="checkbox" id="base" name="base">
             <label for="base" checked>Generate base for letters</label>
         </div>
-        <div id="commandBlock">
-            <input type="text" id="first" class="flexChild" name="first" placeholder="First profile" pattern="^[A-Za-z ]*$">
-            <input type="text" id="last" class="flexChild" name="last" placeholder="Second profile" pattern="^[A-Za-z ]*$">
-            <div id="moreOptions" class="flexChild">
-                <input type="checkbox" id="quality" name="quality">
-                <label for="quality">High quality generation<br/>(May take much longer to generate)</label>
-                <br/>
-                <input type="checkbox" id="base" name="base">
-                <label for="base" checked>Generate base</label>
+        <div class="commandBlock" id="parentBlock">
+            <div class="commandBlock">
+                <input type="text" id="first" class="flexChild" name="first" placeholder="First profile" pattern="^[A-Za-z ]*$">
+                <input type="text" id="last" class="flexChild" name="last" placeholder="Second profile" pattern="^[A-Za-z ]*$">
+                <div id="moreOptions" class="flexChild">
+                    <input type="checkbox" id="quality" name="quality">
+                    <label for="quality">High quality generation<br/>(May take much longer to generate)</label>
+                    <br/>
+                    <input type="checkbox" id="base" name="base">
+                    <label for="base" checked>Generate base</label>
+                </div>
+                <button id="generate" class="flexChild">Generate!</button>
             </div>
-            <button id="generate" class="flexChild">Generate!</button>
-            <p style="text-align: center;" class="flexChild">Snap to viewing:</p>
-            <div id="viewDiv" class="flexChild">
-                <button id="firstCam">First</button>
-                <button id="lastCam">Second</button>
-                <button id="isoCam">Isometric</button>
+            <div class="commandBlock">
+                <p style="text-align: center;" class="flexChild">Snap to viewing:</p>
+                <div id="viewDiv" class="flexChild">
+                    <button id="firstCam" class="viewButton">First</button>
+                    <button id="lastCam" class="viewButton">Second</button>
+                    <button id="isoCam" class="viewButton">Isometric</button>
+                </div>
+                <div>
+                    <input type="checkbox" id="rotate" name="rotate">
+                    <label for="rotate">Auto-rotate</label>
+                </div>
+                <button id="download" class="flexChild">Download STL file</button>
             </div>
-            <div>
-                <input type="checkbox" id="rotate" name="rotate">
-                <label for="rotate">Auto-rotate</label>
-            </div>
-            <button id="download" class="flexChild">Download STL file</button>
         </div>
     </body>
 </html>
