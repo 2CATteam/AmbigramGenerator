@@ -132,7 +132,7 @@ function setWord(key, word) {
     for (var i in word) {
         //Handle space support
         if (word[i] == " ") {
-            pos += 5
+            pos += 20
             continue
         }
         //Set initial values for each letter
