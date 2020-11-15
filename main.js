@@ -284,7 +284,7 @@ async function doGenerate() {
     await sleep(1)
 
     //Material for final shapes
-    var material = new THREE.MeshStandardMaterial({
+    let material = new THREE.MeshStandardMaterial({
         color: 0x2150CE,
         side: THREE.FrontSide,
         roughness: 0.9,
@@ -297,23 +297,23 @@ async function doGenerate() {
     //Perform intersects
     while(construction.firstGroups.length > 0) {
         //Get the source and the mask
-        var src = construction.firstGroups.shift()
-        var mask = construction.lastGroups.splice(Math.floor(Math.random() * construction.lastGroups.length), 1)[0]
+        let src = construction.firstGroups.shift()
+        let mask = construction.lastGroups.splice(Math.floor(Math.random() * construction.lastGroups.length), 1)[0]
         //Save where they are
         src.updateMatrixWorld()
         mask.updateMatrixWorld()
         
         //Convert to BSP
         killCheck()
-        var a = CSG.fromMesh(src)
+        let a = CSG.fromMesh(src)
         killCheck()
-        var b = CSG.fromMesh(mask)
+        let b = CSG.fromMesh(mask)
         killCheck()
 
         //Perform operation and convert to meshes
-        var result = a.intersect(b)
+        let result = a.intersect(b)
         killCheck()
-        var toAdd = CSG.toMesh(result, mask.matrix)
+        let toAdd = CSG.toMesh(result, mask.matrix)
         toAdd.material = material
 
         //Change out meshes
@@ -359,8 +359,6 @@ async function createExtrusion(name, depth, pos, doSide, highQuality=false) {
         loader.load(name, async (data) => {
             //Get data in and out prepared
             const paths = data.paths
-            var group = new THREE.Group()
-            group.name = name + pos + doSide
             //Extrusion settings
             const extrudeSettings = {
                 curveSegments: highQuality ? 30 : 7,
