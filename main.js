@@ -231,21 +231,34 @@ async function doGenerate() {
     console.log(`Sum of first profiles: ${sumScore("first")}`)
     console.log(`Sum of last profiles: ${sumScore("last")}`)
 
-    //Die if there is no solution
-    if (sumScore("first") != sumScore("last")) {
-        console.log("Duplication is necessary, unfortunately")
-        i = 0
+    //Duplicate if there is no solution
+    if (sumScore("first") < sumScore("last")) {
+        var i = 0
         while (sumScore("first") < sumScore("last")) {
             var toAdd = {}
-            Object.assign(toAdd, construction.first[i])
+            toAdd = Object.assign(toAdd, construction.first[i])
             construction.first.push(toAdd)
             i++
         }
+        i = construction.first.length
+        while (sumScore("first") > sumScore("last")) {
+            i--
+            construction.first[i].profiles--
+        }
+    }
+
+    if (sumScore("first") > sumScore("last")) {
+        var i = 0
         while (sumScore("first") > sumScore("last")) {
             var toAdd = {}
-            Object.assign(toAdd, construction.last[i])
+            toAdd = Object.assign(toAdd, construction.last[i])
             construction.last.push(toAdd)
             i++
+        }
+        i = construction.last.length
+        while (sumScore("first") < sumScore("last")) {
+            i--
+            construction.last[i].profiles--
         }
     }
 
