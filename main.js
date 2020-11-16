@@ -397,7 +397,7 @@ $(document).ready(() => {
         if($("#rotate:checked").length > 0) {
             console.log("Rotating")
             controls.autoRotate = true
-            controls.autoRotateSpeed = 4
+            controls.autoRotateSpeed = -4
         } else {
             console.log("Not rotating")
             controls.autoRotate = false
