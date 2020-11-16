@@ -8,6 +8,7 @@
     padding: 15px;
     height: fit-content;
     width: fit-content;
+    margin: 0;
 }
 
 .commandBlock {
@@ -27,7 +28,7 @@
         border-width: 1px;
         padding: 10px;
         height: fit-content;
-        width: calc(100vw - 22px);
+        width: calc(100vw - 23px);
         flex-direction: row;
         justify-content: space-around;
     }
