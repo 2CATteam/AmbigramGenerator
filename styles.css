@@ -1,5 +1,5 @@
 #parentBlock {
-    position: fixed;
+    position: absolute;
     right: 0;
     bottom: 0;
     border-style: solid;
@@ -19,7 +19,7 @@
 
 @media only screen and (orientation: portrait) {
     #parentBlock {
-        position: fixed;
+        position: absolute;
         right: 0;
         left: 0;
         bottom: 0;
@@ -28,11 +28,20 @@
         border-width: 1px;
         padding: 15px;
         height: fit-content;
+        width: 100%;
         flex-direction: row;
+        justify-content: space-around;
     }
-    .commandBlock {
-        height: 100%;
-    }
+}
+
+body {
+    overflow: hidden;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
+html {
+    min-height: -webkit-fill-available;
 }
 
 #moreOptions {
