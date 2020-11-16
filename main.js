@@ -79,6 +79,7 @@ function setCameraIso() {
     camera.right = Math.hypot(construction.firstWidth, construction.lastWidth) * 0.7
     camera.top = (camera.right - camera.left) * aspectRatio / 2 + 10
     camera.bottom = (camera.right - camera.left) * aspectRatio / -2 + 10
+    camera.zoom = 1
     camera.updateProjectionMatrix()
     controls.update()
     render()
@@ -90,12 +91,14 @@ function setCameraFirst() {
     renderer.getSize(size)
     const aspectRatio = size.y / size.x
     //Set position
-    camera.position.set(0, 0, 
-        Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.lastWidth / 2)
+    camera.position.x = 0
+    camera.position.y = 0
+    camera.position.z = Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.lastWidth / 2
     camera.left = construction.firstWidth * -0.6
     camera.right = construction.firstWidth * 0.6
     camera.top = (camera.right - camera.left) * aspectRatio / 2 + 10
     camera.bottom = (camera.right - camera.left) * aspectRatio / -2 + 10
+    camera.zoom = 1
     camera.updateProjectionMatrix()
     controls.update()
     render()
@@ -114,6 +117,7 @@ function setCameraLast() {
     camera.right = construction.lastWidth * 0.6
     camera.top = (camera.right - camera.left) * aspectRatio / 2 + 10
     camera.bottom = (camera.right - camera.left) * aspectRatio / -2 + 10
+    camera.zoom = 1
     camera.updateProjectionMatrix()
     controls.update()
     render()
