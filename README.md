@@ -20,7 +20,7 @@ The tool uses an orthographic camera when displaying the files, rather than a pe
 
 As noted above, it cannot generate for a particular perspective. It also currently only supports letters and spaces. I may add number support later if someone asks for it, IDK. The SVG files are kinda the hardest part.
 
-#### Why doesn't this tool support <feature>?
+#### Why doesn't this tool support \<feature\>?
 
 Primarily because I slapped this together in a weekend for fun. If you have something you want me to add, though, please let me know and I'll look into it! Better yet, if you want to add the feature yourself, I'm always open to pull requests!
 
