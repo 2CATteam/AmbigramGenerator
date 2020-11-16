@@ -343,7 +343,10 @@ function animate() {
 
 //Handles changing canvas size
 function onWindowResize(){
+    console.log("Resizing!")
     const canvas = document.querySelector('#c')
+    canvas.height = window.innerHeight
+    canvas.width = window.innerWidth
     const aspectRatio = canvas.height / canvas.width;
     camera.top = (camera.right - camera.left) * aspectRatio / 2
     camera.bottom = (camera.right - camera.left) * aspectRatio / -2
@@ -353,16 +356,12 @@ function onWindowResize(){
 }
 
 function resizeCanvasToDisplaySize() {
-    const canvas = renderer.domElement;
-    // look up the size the canvas is being displayed
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
+    const canvas = document.querySelector('#c')
   
     // adjust displayBuffer size to match
-    if (canvas.width !== width || canvas.height !== height) {
-        // you must pass false here or three.js sadly fights the browser
+    if (window.innerWidth !== canvas.width || window.innerHeight !== canvas.height) {
+        console.log("Loop resizing")
         onWindowResize()
-        // update any render target sizes here
     }
 }
 
