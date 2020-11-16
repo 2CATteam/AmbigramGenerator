@@ -18,7 +18,7 @@ async function createModel() {
         //Make each profile and add it to the array
         for (var j = 1; j <= profiles; j++) {
             let obj = await createExtrusion(construction.first[i].letter + profiles + "-" + j,
-                construction.lastWidth, construction.first[i].pos, false, quality)
+                construction.lastWidth, construction.first[i].pos, false, quality, j)
             firstGroups.push(obj)
         }
     }
@@ -31,7 +31,7 @@ async function createModel() {
         //Make each profile and add it to the array
         for (var j = 1; j <= profiles; j++) {
             let obj = await createExtrusion(construction.last[i].letter + profiles + "-" + j,
-                construction.firstWidth, construction.last[i].pos, true, quality)
+                construction.firstWidth, construction.last[i].pos, true, quality, j)
             lastGroups.push(obj)
         }
     }
@@ -87,7 +87,7 @@ async function createModel() {
     postMessage({type: "Done"})
 }
 
-async function createExtrusion(name, depth, pos, doSide, highQuality=false) {
+async function createExtrusion(name, depth, pos, doSide, highQuality=false, offset) {
     return new Promise((res, rej) => {
         name = "./letters/" + name + ".svg"
         loader.load(name, async (data) => {
@@ -120,7 +120,7 @@ async function createExtrusion(name, depth, pos, doSide, highQuality=false) {
             const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings)
             geometry.computeBoundingBox()
             const mesh = new THREE.Mesh(geometry, material)
-            mesh.name = name + pos
+            mesh.name = name + offset
 
             if (doSide) {
                 mesh.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2)

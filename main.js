@@ -235,13 +235,13 @@ async function doGenerate() {
     if (sumScore("first") != sumScore("last")) {
         console.log("Duplication is necessary, unfortunately")
         i = 0
-        while (sumScore("first") > sumScore("last")) {
+        while (sumScore("first") < sumScore("last")) {
             var toAdd = {}
             Object.assign(toAdd, construction.first[i])
             construction.first.push(toAdd)
             i++
         }
-        while (sumScore("first") < sumScore("last")) {
+        while (sumScore("first") > sumScore("last")) {
             var toAdd = {}
             Object.assign(toAdd, construction.last[i])
             construction.last.push(toAdd)
