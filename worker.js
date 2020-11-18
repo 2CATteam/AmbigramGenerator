@@ -80,7 +80,7 @@ async function createModel() {
     if (base) {
         const baseGeometry = new THREE.BoxGeometry(construction.firstWidth + 12, 7, construction.lastWidth + 12)
         const base = new THREE.Mesh(baseGeometry, material)
-        postMessage({type: "Add", geometry: base.toJSON()})
+        postMessage({type: "Add", geometry: base.toJSON(), after: {y: -3.5}})
         base.translateY(-3.5)
     }
 
