@@ -264,7 +264,7 @@ function makeGif() {
         workers: 10,
         quality: 10,
         background: 0x111111,
-        debug: true,
+        debug: false,
         workerScript: './libs/gif.worker.js'
     })
 
