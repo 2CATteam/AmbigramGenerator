@@ -270,13 +270,13 @@ async function makeGif() {
             x: 0,
             y: 0,
             z: Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.lastWidth / 2,
-            width = construction.firstWidth * 1.2
+            width: construction.firstWidth * 1.2
         },
         c: {
             x: Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.firstWidth / 2,
             y: 0,
             z: 0,
-            width = construction.lastWidth * 1.2
+            width: construction.lastWidth * 1.2
         }
     }
 }
