@@ -312,6 +312,15 @@ function download() {
     saveAs(blob, `${construction.firstWord}${construction.lastWord}.stl`)
 }
 
+async function makeGif() {
+    var gif = new GIF({
+        workers: 1,
+        quality: 1,
+        background: 0x111111,
+        debug: true
+    })
+}
+
 //Animation loop
 function animate() {
     requestAnimationFrame(animate)
