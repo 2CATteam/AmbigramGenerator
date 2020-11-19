@@ -144,15 +144,14 @@ async function doGenerate() {
     //If the first is too complex, simplify it
     var override = false
     while (sumScore("first") > sumScore("last")) {
-        
         if (!simplify("first", override)) {
             if (override) {
                 break
             }
-            if (confirm("The first word is too complex!\nThe generation may be able continue, but the result may look kinda lame, if it completes at all.")) {
+            if (confirm("The first word is too complex!\nThe generation can continue, but the result may look kinda lame.")) {
                 override = true
             } else {
-                break
+                return
             }
         }
     }
@@ -162,10 +161,10 @@ async function doGenerate() {
             if (override) {
                 break
             }
-            if (confirm("The second word is too complex!\nThe generation may be able to continue, but the result may look kinda lame, if it completes at all.")) {
+            if (confirm("The second word is too complex!\nThe generation can continue, but the result may look kinda lame.")) {
                 override = true
             } else {
-                break
+                return
             }
         }
     }
