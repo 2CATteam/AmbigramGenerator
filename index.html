@@ -8,9 +8,12 @@
         <meta name="description" content="Tool for generating ambigrams from text for 3D printing">
         <meta name="keywords" content="Ambigram,generator,3D printing,words,sculpture,free,service,art">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="module" src="./libs/FileSaver.js"></script>
         <script type="module" src="main.js"></script>
+        <link rel="preload" href="./letterData.js" as="script">
+        <link rel="preload" href="./three/examples/jsm/exporters/STLExporter.js" as="script">
+        <link rel="preload" href="./three/build/three.module.js" as="script">
     </head>
     <body>
         <canvas id="c"></canvas>
