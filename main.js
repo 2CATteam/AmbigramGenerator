@@ -189,6 +189,7 @@ async function doGenerate() {
         }
     }
 
+    //Same as above but for the other profile
     if (sumScore("first") > sumScore("last")) {
         var i = 0
         while (sumScore("first") > sumScore("last")) {
@@ -212,8 +213,10 @@ async function doGenerate() {
     worker.onmessage = (msg) => {
         //Add returned geometry
         if (msg.data.type == "Add") {
+            //Parse data and add geometry
             var adding = loader.parse(msg.data.geometry)
             scene.add(adding)
+            //Translate and rotate based on the message data
             if (msg.data.after) {
                 if (msg.data.after.r) {
                     adding.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), msg.data.after.r)
@@ -240,9 +243,11 @@ async function doGenerate() {
         }
     }
 
+    //Send initial values
     worker.postMessage([construction, $("#base:checked").length > 0, $("#quality:checked").length > 0])
 }
 
+//Download STL file
 function download() {
     var exporter = new STLExporter()
     var toSave = exporter.parse(scene)
@@ -250,7 +255,9 @@ function download() {
     saveAs(blob, `${construction.firstWord}${construction.lastWord}.stl`)
 }
 
+//Set up a gif render
 function makeGif() {
+    //Create renderer and initialize gif
     gifRenderer = new GIF({
         workers: 10,
         quality: 10,
@@ -259,6 +266,8 @@ function makeGif() {
         workerScript: './libs/gif.worker.js'
     })
 
+    //Calculate settings for gif rendering
+    //a, b, c are the three positions we float between
     gifData = {
         pauseDelay: 1000,
         frameDelay: 30,
@@ -284,82 +293,110 @@ function makeGif() {
         state: 0,
     }
 
+    //Set initial position
     setCameraIso()
 }
 
+//Runs a single step of a gif rendering
 function gifStep() {
-    //console.log("Trying to do a step in the gif rendering")
     switch (gifData.state) {
+        //Cases for when we've reached a, b, or c
         case 0:
         case 2:
         case 4:
+            //Save static view
             gifRenderer.addFrame(renderer.domElement, {delay: gifData.pauseDelay, copy: true})
+            //Go to next part
             gifData.step = 0
             gifData.state++
             break
         case 1:
+            //Add frame
             gifRenderer.addFrame(renderer.domElement, {delay: gifData.frameDelay, copy: true})
+            //Go to next render position
             setCamera(
                 (gifData.a.x - gifData.b.x) * (1 - (gifData.step / gifData.frameAmount)) + gifData.b.x,
                 (gifData.a.y - gifData.b.y) * (1 - (gifData.step / gifData.frameAmount)) + gifData.b.y,
                 (gifData.a.z - gifData.b.z) * (1 - (gifData.step / gifData.frameAmount)) + gifData.b.z,
                 (gifData.a.width - gifData.b.width) * (1 - (gifData.step / gifData.frameAmount)) + gifData.b.width
             )
+            //Go to next step
             gifData.step++
+            //If we're at the right place, increment state
             if (gifData.step > gifData.frameAmount) {
                 setCameraFirst()
                 gifData.state++
             }
             break
         case 3:
+            //Add frame
             gifRenderer.addFrame(renderer.domElement, {delay: gifData.frameDelay, copy: true})
+            //Go to next render position
             setCamera(
                 (gifData.b.x - gifData.c.x) * (1 - (gifData.step / gifData.frameAmount)) + gifData.c.x,
                 (gifData.b.y - gifData.c.y) * (1 - (gifData.step / gifData.frameAmount)) + gifData.c.y,
                 (gifData.b.z - gifData.c.z) * (1 - (gifData.step / gifData.frameAmount)) + gifData.c.z,
                 (gifData.b.width - gifData.c.width) * (1 - (gifData.step / gifData.frameAmount)) + gifData.c.width
             )
+            //Go to next step
             gifData.step++
+            //If we're at the right place, increment state
             if (gifData.step > gifData.frameAmount) {
                 setCameraLast()
                 gifData.state++
             }
             break
         case 5:
+            //Add frame
             gifRenderer.addFrame(renderer.domElement, {delay: gifData.frameDelay, copy: true})
+            //Go to next render position
             setCamera(
                 (gifData.c.x - gifData.a.x) * (1 - (gifData.step / gifData.frameAmount)) + gifData.a.x,
                 (gifData.c.y - gifData.a.y) * (1 - (gifData.step / gifData.frameAmount)) + gifData.a.y,
                 (gifData.c.z - gifData.a.z) * (1 - (gifData.step / gifData.frameAmount)) + gifData.a.z,
                 (gifData.c.width - gifData.a.width) * (1 - (gifData.step / gifData.frameAmount)) + gifData.a.width
             )
+            //Go to next step
             gifData.step++
+            //If we're at the right place, increment state
             if (gifData.step > gifData.frameAmount) {
                 setCameraIso()
                 gifData.state++
             }
             break
         case 6:
+            //Update text when beginning
             gifRenderer.on('start', () => {
-                $("#gif").text("Rendering... 0%")
+                $("#gifText").text("Rendering... 0%")
             })
+            //Update text when we made progress
             gifRenderer.on('progress', (p) => {
-                $("#gif").text(`Rendering... ${Math.floor(p * 100)}%`)
+                $("#gifText").text(`Rendering... ${Math.floor(p * 100)}%`)
             })
+            //Update UI when finished
             gifRenderer.on('finished', (blob) => {
+                //Save file
                 saveAs(blob, `${construction.firstWord}${construction.lastWord}Render.gif`)
-                $("#gif").text("Render GIF")
+                //Update UI
                 $("#gif").prop('disabled', false)
+                $("#gif").prop('hidden', false)
+                $("#gifText").text("Render GIF")
+                $("#gifText").prop('hidden', true)
                 $("#generate").prop('disabled', false)
+                //Go to final state
                 gifData.state++
             })
+            //Re-enable controls
+            controls.enabled = true
+            //Begin rendering to file
             gifRenderer.render()
             gifData.state++
             break
         case 7:
-            //console.log("Waiting on gif renderer...")
+            //Waiting until gif renderer is finished
             break
         case 8:
+            //Remove data and renderer
             gifData = undefined
             gifRenderer = undefined
             break
@@ -368,22 +405,29 @@ function gifStep() {
     }
 }
 
+//Set camera view and position
 function setCamera(x, y, z, width) {
+    //Calculate aspect ratio
     var size = new THREE.Vector2()
     renderer.getSize(size)
     const aspectRatio = size.y / size.x
+    //Set position
     camera.position.x = x
     camera.position.y = y
     camera.position.z = z
+    //Set width
     camera.left = width / -2
     camera.right = width / 2
+    //Set height and zoom
     camera.top = (camera.right - camera.left) * aspectRatio / 2 + 10
     camera.bottom = (camera.right - camera.left) * aspectRatio / -2 + 10
     camera.zoom = 1
+    //Update camera and controls
     camera.updateProjectionMatrix()
     controls.update()
 }
 
+//Set camera to an isometric view
 function setCameraIso() {
     setCamera(
         Math.max(construction.firstWidth, construction.lastWidth) * 1.5,
@@ -393,6 +437,7 @@ function setCameraIso() {
     )
 }
 
+//Set camera to view the first profile
 function setCameraFirst() {
     setCamera(
         0,
@@ -402,6 +447,7 @@ function setCameraFirst() {
     )
 }
 
+//Set camera to view the second profile
 function setCameraLast() {
     setCamera(
         Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.firstWidth / 2,
@@ -413,23 +459,24 @@ function setCameraLast() {
 
 //Handles changing canvas size
 function onWindowResize(){
-    console.log("Resizing!")
+    //Set canvas size
     const canvas = document.querySelector('#c')
     canvas.height = window.innerHeight
     canvas.width = window.innerWidth
+    //Set camera aspect ratio
     const aspectRatio = canvas.height / canvas.width;
     camera.top = (camera.right - camera.left) * aspectRatio / 2
     camera.bottom = (camera.right - camera.left) * aspectRatio / -2
     camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight, false);
+    //Update renderer
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
 }
 
+
 function resizeCanvasToDisplaySize() {
-    const canvas = document.querySelector('#c')
-  
-    // adjust displayBuffer size to match
+    const canvas = document.querySelector('#c')  
+    //If the canvas size is wrong, call the resize function
     if (window.innerWidth !== canvas.width || window.innerHeight !== canvas.height) {
-        console.log("Loop resizing")
         onWindowResize()
     }
 }
@@ -439,6 +486,7 @@ function animate() {
     requestAnimationFrame(animate)
     controls.update()
     render()
+    //If doing a gif render, do the next step
     if (gifData) {
         gifStep()
     }
@@ -468,12 +516,19 @@ $(document).ready(() => {
         download()
     })
 
+    //Enable gif button
     $("#gif").click(() => {
+        //Disable rotation and controls
         controls.autoRotate = false
-        makeGif()
+        controls.enabled = false
+        //Switch gif button to gif text and disable generate button
         $("#gif").prop('disabled', true)
+        $("#gif").prop('hidden', true)
+        $("#gifText").prop('hidden', false)
+        $("#gifText").text("Recording...")
         $("#generate").prop('disabled', true)
-        $("#gif").text("Recording...")
+        //Start the gif
+        makeGif()
     })
 
     //Enable generate button
