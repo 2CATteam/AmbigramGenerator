@@ -5,7 +5,7 @@ import { letterData } from "./letterData.js"
 
 var camera, controls, scene, renderer
 
-var gif
+var gifRenderer, gifData
 
 var construction = {}
 
@@ -251,15 +251,18 @@ function download() {
     saveAs(blob, `${construction.firstWord}${construction.lastWord}.stl`)
 }
 
-async function makeGif() {
-    var gifRenderer = new GIF({
+function makeGif() {
+    gifRenderer = new GIF({
         workers: 1,
         quality: 1,
         background: 0x111111,
         debug: true
     })
 
-    gif = {
+    gifData = {
+        pauseDelay: 3000,
+        frameDelay: 30,
+        frameAmount: 200,
         a: {
             x: Math.max(construction.firstWidth, construction.lastWidth) * 1.5,
             y: Math.max(construction.firstWidth, construction.lastWidth) * 1.5,
@@ -277,7 +280,82 @@ async function makeGif() {
             y: 0,
             z: 0,
             width: construction.lastWidth * 1.2
-        }
+        },
+        state: 0,
+    }
+
+    setCameraIso()
+}
+
+function gifStep() {
+    console.log("Trying to do a step in the gif rendering")
+    switch (gifData.state) {
+        case 0:
+        case 2:
+        case 4:
+            gifData.addFrame(render.canvas, {delay: gifData.pauseDelay})
+            gifData.step = 0
+            gifData.state++
+            break
+        case 1:
+            gifData.addFrame(render.canvas, {delay: gifData.frameDelay})
+            setCamera(
+                (gifData.a.x - gifData.b.x) * (1 - (gifData.step / gifData.frameAmount)) + gifData.b.x,
+                (gifData.a.y - gifData.b.y) * (1 - (gifData.step / gifData.frameAmount)) + gifData.b.y,
+                (gifData.a.z - gifData.b.z) * (1 - (gifData.step / gifData.frameAmount)) + gifData.b.z,
+                (gifData.a.width - gifData.b.width) * (1 - (gifData.step / gifData.frameAmount)) + gifData.b.width
+            )
+            step++
+            if (step > gifData.frameAmount) {
+                setCameraFirst()
+                gifData.state++
+            }
+            break
+        case 3:
+            gifData.addFrame(render.canvas, {delay: gifData.frameDelay})
+            setCamera(
+                (gifData.b.x - gifData.c.x) * (1 - (gifData.step / gifData.frameAmount)) + gifData.c.x,
+                (gifData.b.y - gifData.c.y) * (1 - (gifData.step / gifData.frameAmount)) + gifData.c.y,
+                (gifData.b.z - gifData.c.z) * (1 - (gifData.step / gifData.frameAmount)) + gifData.c.z,
+                (gifData.b.width - gifData.c.width) * (1 - (gifData.step / gifData.frameAmount)) + gifData.c.width
+            )
+            step++
+            if (step > gifData.frameAmount) {
+                setCameraLast()
+                gifData.state++
+            }
+            break
+        case 5:
+            gifData.addFrame(render.canvas, {delay: gifData.frameDelay})
+            setCamera(
+                (gifData.c.x - gifData.a.x) * (1 - (gifData.step / gifData.frameAmount)) + gifData.a.x,
+                (gifData.c.y - gifData.a.y) * (1 - (gifData.step / gifData.frameAmount)) + gifData.a.y,
+                (gifData.c.z - gifData.a.z) * (1 - (gifData.step / gifData.frameAmount)) + gifData.a.z,
+                (gifData.c.width - gifData.a.width) * (1 - (gifData.step / gifData.frameAmount)) + gifData.a.width
+            )
+            step++
+            if (step > gifData.frameAmount) {
+                setCameraIso()
+                gifData.state++
+            }
+            break
+        case 6:
+            gifRenderer.on('finished', (blob) => {
+                window.open(URL.createObjectURL(blob))
+                gifData.state++
+            })
+            gifRenderer.render()
+            gifData.state++
+            break
+        case 7:
+            console.log("Waiting on gif renderer...")
+            break
+        case 8:
+            gifData = undefined
+            gifRenderer = undefined
+            break
+        default:
+            console.log("Something happened, we should not be here")
     }
 }
 
@@ -352,6 +430,9 @@ function animate() {
     requestAnimationFrame(animate)
     controls.update()
     render()
+    if (gifData) {
+        gifStep()
+    }
 }
 
 //Render scene
