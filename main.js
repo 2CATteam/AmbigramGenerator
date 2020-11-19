@@ -253,16 +253,17 @@ function download() {
 
 function makeGif() {
     gifRenderer = new GIF({
-        workers: 1,
-        quality: 1,
+        workers: 10,
+        quality: 10,
         background: 0x111111,
-        debug: true
+        debug: true,
+        workerScript: './libs/gif.worker.js'
     })
 
     gifData = {
-        pauseDelay: 3000,
+        pauseDelay: 1000,
         frameDelay: 30,
-        frameAmount: 200,
+        frameAmount: 50,
         a: {
             x: Math.max(construction.firstWidth, construction.lastWidth) * 1.5,
             y: Math.max(construction.firstWidth, construction.lastWidth) * 1.5,
@@ -288,74 +289,83 @@ function makeGif() {
 }
 
 function gifStep() {
-    console.log("Trying to do a step in the gif rendering")
+    //console.log("Trying to do a step in the gif rendering")
     switch (gifData.state) {
         case 0:
         case 2:
         case 4:
-            gifData.addFrame(render.canvas, {delay: gifData.pauseDelay})
+            gifRenderer.addFrame(renderer.domElement, {delay: gifData.pauseDelay, copy: true})
             gifData.step = 0
             gifData.state++
             break
         case 1:
-            gifData.addFrame(render.canvas, {delay: gifData.frameDelay})
+            gifRenderer.addFrame(renderer.domElement, {delay: gifData.frameDelay, copy: true})
             setCamera(
                 (gifData.a.x - gifData.b.x) * (1 - (gifData.step / gifData.frameAmount)) + gifData.b.x,
                 (gifData.a.y - gifData.b.y) * (1 - (gifData.step / gifData.frameAmount)) + gifData.b.y,
                 (gifData.a.z - gifData.b.z) * (1 - (gifData.step / gifData.frameAmount)) + gifData.b.z,
                 (gifData.a.width - gifData.b.width) * (1 - (gifData.step / gifData.frameAmount)) + gifData.b.width
             )
-            step++
-            if (step > gifData.frameAmount) {
+            gifData.step++
+            if (gifData.step > gifData.frameAmount) {
                 setCameraFirst()
                 gifData.state++
             }
             break
         case 3:
-            gifData.addFrame(render.canvas, {delay: gifData.frameDelay})
+            gifRenderer.addFrame(renderer.domElement, {delay: gifData.frameDelay, copy: true})
             setCamera(
                 (gifData.b.x - gifData.c.x) * (1 - (gifData.step / gifData.frameAmount)) + gifData.c.x,
                 (gifData.b.y - gifData.c.y) * (1 - (gifData.step / gifData.frameAmount)) + gifData.c.y,
                 (gifData.b.z - gifData.c.z) * (1 - (gifData.step / gifData.frameAmount)) + gifData.c.z,
                 (gifData.b.width - gifData.c.width) * (1 - (gifData.step / gifData.frameAmount)) + gifData.c.width
             )
-            step++
-            if (step > gifData.frameAmount) {
+            gifData.step++
+            if (gifData.step > gifData.frameAmount) {
                 setCameraLast()
                 gifData.state++
             }
             break
         case 5:
-            gifData.addFrame(render.canvas, {delay: gifData.frameDelay})
+            gifRenderer.addFrame(renderer.domElement, {delay: gifData.frameDelay, copy: true})
             setCamera(
                 (gifData.c.x - gifData.a.x) * (1 - (gifData.step / gifData.frameAmount)) + gifData.a.x,
                 (gifData.c.y - gifData.a.y) * (1 - (gifData.step / gifData.frameAmount)) + gifData.a.y,
                 (gifData.c.z - gifData.a.z) * (1 - (gifData.step / gifData.frameAmount)) + gifData.a.z,
                 (gifData.c.width - gifData.a.width) * (1 - (gifData.step / gifData.frameAmount)) + gifData.a.width
             )
-            step++
-            if (step > gifData.frameAmount) {
+            gifData.step++
+            if (gifData.step > gifData.frameAmount) {
                 setCameraIso()
                 gifData.state++
             }
             break
         case 6:
+            gifRenderer.on('start', () => {
+                $("#gif").text("Rendering... 0%")
+            })
+            gifRenderer.on('progress', (p) => {
+                $("#gif").text(`Rendering... ${Math.floor(p * 100)}%`)
+            })
             gifRenderer.on('finished', (blob) => {
-                window.open(URL.createObjectURL(blob))
+                saveAs(blob, `${construction.firstWord}${construction.lastWord}Render.gif`)
+                $("#gif").text("Render GIF")
+                $("#gif").prop('disabled', false)
+                $("#generate").prop('disabled', false)
                 gifData.state++
             })
             gifRenderer.render()
             gifData.state++
             break
         case 7:
-            console.log("Waiting on gif renderer...")
+            //console.log("Waiting on gif renderer...")
             break
         case 8:
             gifData = undefined
             gifRenderer = undefined
             break
         default:
-            console.log("Something happened, we should not be here")
+            console.error("Something happened, we should not be here")
     }
 }
 
@@ -460,7 +470,11 @@ $(document).ready(() => {
     })
 
     $("#gif").click(() => {
+        controls.autoRotate = false
         makeGif()
+        $("#gif").prop('disabled', true)
+        $("#generate").prop('disabled', true)
+        $("#gif").text("Recording...")
     })
 
     //Enable generate button
