@@ -5,6 +5,8 @@ import { letterData } from "./letterData.js"
 
 var camera, controls, scene, renderer
 
+var gif
+
 var construction = {}
 
 const loader = new THREE.ObjectLoader()
@@ -59,60 +61,6 @@ async function main() {
 
     //Initial generation
     doGenerate()
-}
-//Nice
-function setCameraIso() {
-    //Get aspect ratio
-    var size = new THREE.Vector2()
-    renderer.getSize(size)
-    const aspectRatio = size.y / size.x
-    //Set position
-    camera.position.x = Math.max(construction.firstWidth, construction.lastWidth) * 1.5
-    camera.position.y = Math.max(construction.firstWidth, construction.lastWidth) * 1.5
-    camera.position.z = Math.max(construction.firstWidth, construction.lastWidth) * 1.5
-    camera.left = Math.hypot(construction.firstWidth, construction.lastWidth) * -0.7
-    camera.right = Math.hypot(construction.firstWidth, construction.lastWidth) * 0.7
-    camera.top = (camera.right - camera.left) * aspectRatio / 2 + 10
-    camera.bottom = (camera.right - camera.left) * aspectRatio / -2 + 10
-    camera.zoom = 1
-    camera.updateProjectionMatrix()
-    controls.update()
-}
-
-function setCameraFirst() {
-    //Get aspect ratio
-    var size = new THREE.Vector2()
-    renderer.getSize(size)
-    const aspectRatio = size.y / size.x
-    //Set position
-    camera.position.x = 0
-    camera.position.y = 0
-    camera.position.z = Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.lastWidth / 2
-    camera.left = construction.firstWidth * -0.6
-    camera.right = construction.firstWidth * 0.6
-    camera.top = (camera.right - camera.left) * aspectRatio / 2 + 10
-    camera.bottom = (camera.right - camera.left) * aspectRatio / -2 + 10
-    camera.zoom = 1
-    camera.updateProjectionMatrix()
-    controls.update()
-}
-
-function setCameraLast() {
-    //Get aspect ratio
-    var size = new THREE.Vector2()
-    renderer.getSize(size)
-    const aspectRatio = size.y / size.x
-    //Set position
-    camera.position.x = Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.lastWidth / 2
-    camera.position.y = 0
-    camera.position.z = 0
-    camera.left = construction.lastWidth * -0.6
-    camera.right = construction.lastWidth * 0.6
-    camera.top = (camera.right - camera.left) * aspectRatio / 2 + 10
-    camera.bottom = (camera.right - camera.left) * aspectRatio / -2 + 10
-    camera.zoom = 1
-    camera.updateProjectionMatrix()
-    controls.update()
 }
 
 //Initialize array for construction
@@ -304,19 +252,76 @@ function download() {
 }
 
 async function makeGif() {
-    var gif = new GIF({
+    var gifRenderer = new GIF({
         workers: 1,
         quality: 1,
         background: 0x111111,
         debug: true
     })
+
+    gif = {
+        a: {
+            x: Math.max(construction.firstWidth, construction.lastWidth) * 1.5,
+            y: Math.max(construction.firstWidth, construction.lastWidth) * 1.5,
+            z: Math.max(construction.firstWidth, construction.lastWidth) * 1.5,
+            width: Math.hypot(construction.firstWidth, construction.lastWidth) * 1.4
+        },
+        b: {
+            x: 0,
+            y: 0,
+            z: Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.lastWidth / 2,
+            width = construction.firstWidth * 1.2
+        },
+        c: {
+            x: Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.firstWidth / 2,
+            y: 0,
+            z: 0,
+            width = construction.lastWidth * 1.2
+        }
+    }
 }
 
-//Animation loop
-function animate() {
-    requestAnimationFrame(animate)
+function setCamera(x, y, z, width) {
+    var size = new THREE.Vector2()
+    renderer.getSize(size)
+    const aspectRatio = size.y / size.x
+    camera.position.x = x
+    camera.position.y = y
+    camera.position.z = z
+    camera.left = width / -2
+    camera.right = width / 2
+    camera.top = (camera.right - camera.left) * aspectRatio / 2 + 10
+    camera.bottom = (camera.right - camera.left) * aspectRatio / -2 + 10
+    camera.zoom = 1
+    camera.updateProjectionMatrix()
     controls.update()
-    render()
+}
+
+function setCameraIso() {
+    setCamera(
+        Math.max(construction.firstWidth, construction.lastWidth) * 1.5,
+        Math.max(construction.firstWidth, construction.lastWidth) * 1.5,
+        Math.max(construction.firstWidth, construction.lastWidth) * 1.5,
+        Math.hypot(construction.firstWidth, construction.lastWidth) * 1.4
+    )
+}
+
+function setCameraFirst() {
+    setCamera(
+        0,
+        0,
+        Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.lastWidth / 2,
+        construction.firstWidth * 1.2
+    )
+}
+
+function setCameraLast() {
+    setCamera(
+        Math.max(construction.firstWidth, construction.lastWidth) * 1.5 + construction.firstWidth / 2,
+        0,
+        0,
+        construction.lastWidth * 1.2
+    )
 }
 
 //Handles changing canvas size
@@ -340,6 +345,13 @@ function resizeCanvasToDisplaySize() {
         console.log("Loop resizing")
         onWindowResize()
     }
+}
+
+//Animation loop
+function animate() {
+    requestAnimationFrame(animate)
+    controls.update()
+    render()
 }
 
 //Render scene
