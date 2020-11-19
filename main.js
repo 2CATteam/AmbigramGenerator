@@ -459,6 +459,10 @@ $(document).ready(() => {
         download()
     })
 
+    $("#gif").click(() => {
+        makeGif()
+    })
+
     //Enable generate button
     $("#generate").click(() => {
         //If running, kill
