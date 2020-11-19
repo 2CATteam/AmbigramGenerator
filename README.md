@@ -55,6 +55,8 @@ Generating and manipulating 3D geometry is a hard task at the best of times, and
 
 [JQuery](https://jquery.com/) - because everything needs JQuery
 
+[Gif.js](https://github.com/jnordberg/gif.js) - Lets me render the gifs for sharing
+
 [FileSaver.js](https://github.com/eligrey/FileSaver.js/) - Allows for downloading the files
 
 [Seedrandom.js](https://github.com/davidbau/seedrandom) - Allows files to be generated consistently. This is important because, if you print each letter individually and don't have access to the original file, it can be pretty tricky trying to guess where the pieces go (I've had this happen to me multiple times when I used a similar generator I made in VBA for Autodesk Inventor).
