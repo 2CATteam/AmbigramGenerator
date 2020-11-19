@@ -70,10 +70,9 @@ async function createModel() {
         postMessage({type: "Add", geometry: toAdd.toJSON()})
     }
 
-    material = new THREE.MeshStandardMaterial({
+    material = new THREE.MeshPhongMaterial({
         color: 0x11207E,
         side: THREE.FrontSide,
-        roughness: 0.9,
         emissive: 0x0f0f0f
     })
 
