@@ -37,10 +37,9 @@ async function createModel() {
     }
 
     //Material for final shapes
-    let material = new THREE.MeshStandardMaterial({
+    let material = new THREE.MeshPhongMaterial({
         color: 0x2150CE,
         side: THREE.FrontSide,
-        roughness: 0.9,
         emissive: 0x0f0f0f
     })
 
