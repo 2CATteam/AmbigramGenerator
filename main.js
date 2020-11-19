@@ -57,11 +57,6 @@ async function main() {
     //const axesHelper = new THREE.AxesHelper(4)
     //scene.add(axesHelper)
 
-    render()
-
-    //await createExtrusion("L1-1", 5, 0, false)
-    //render()
-
     //Initial generation
     doGenerate()
 }
@@ -82,7 +77,6 @@ function setCameraIso() {
     camera.zoom = 1
     camera.updateProjectionMatrix()
     controls.update()
-    render()
 }
 
 function setCameraFirst() {
@@ -101,7 +95,6 @@ function setCameraFirst() {
     camera.zoom = 1
     camera.updateProjectionMatrix()
     controls.update()
-    render()
 }
 
 function setCameraLast() {
@@ -120,7 +113,6 @@ function setCameraLast() {
     camera.zoom = 1
     camera.updateProjectionMatrix()
     controls.update()
-    render()
 }
 
 //Initialize array for construction
@@ -200,7 +192,6 @@ async function doGenerate() {
     if (!last) last = "Example"
     setWord("last", last)
     setCameraIso()
-    render()
 
     //If the first is too complex, simplify it
     var override = false
@@ -339,7 +330,6 @@ function onWindowResize(){
     camera.bottom = (camera.right - camera.left) * aspectRatio / -2
     camera.updateProjectionMatrix();
     renderer.setSize( window.innerWidth, window.innerHeight, false);
-    render()
 }
 
 function resizeCanvasToDisplaySize() {
