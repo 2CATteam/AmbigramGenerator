@@ -79,15 +79,17 @@ function setWord(key, word) {
             pos += 20
             continue
         }
-        //Set initial values for each letter
-        construction[key].push({
-            letter: word[i],
-            profiles: letterData[word[i]].max,
-            width: letterData[word[i]].width,
-            pos: pos
-        })
-        //Update position
-        pos += letterData[word[i]].width + 3
+        if (letterData[word[i]]) {
+            //Set initial values for each letter
+            construction[key].push({
+                letter: word[i],
+                profiles: letterData[word[i]].max,
+                width: letterData[word[i]].width,
+                pos: pos
+            })
+            //Update position
+            pos += letterData[word[i]].width + 3
+        }
     }
     construction[key + "Width"] = pos - 3
 }
