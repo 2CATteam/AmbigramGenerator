@@ -40,6 +40,8 @@ If you want to make your model easier to see from close-up, you can generate a f
 
 As noted above, it cannot generate a model for a particular perspective. It also currently only supports letters, numbers, and spaces. I currently have no plans to implement any more characters, since any characters beyond what is already supported would require a significant number of changes to the current algorithm. That said, feel free to submit any pull requests implementing new characters if you want.
 
+Additionally, it has no way of identifying the ocassional instance where it matches letters such that there's small pieces left hovering, or other unnecessary little bits that are unsuitable for 3D printing. To fix this, you can re-roll the RNG on the model by adding unsupported characters to the input. So, if you're doing "Default" "Example", you can change it to "Default." ".Example" and get a different pairing of letters. If you need to keep re-rolling, just add more characters.
+
 #### Why doesn't this tool support \<feature\>?
 
 Primarily because I slapped this together in a weekend for fun. If you have something you want me to add, though, please let me know and I'll look into it (Unless that request is about additional characters - see above)! Better yet, if you want to add the feature yourself, I'm always open to pull requests!
