@@ -102,9 +102,6 @@ async function createExtrusion(name, depth, pos, doSide, highQuality=false, offs
                 steps: 2,
                 depth: depth
             }
-				
-				console.log(name)
-				console.log(orientation)
 
             //Get this path and make it shapes
             const path = paths[0]
