@@ -44,7 +44,7 @@ async function createModel() {
     })
 
     //Seed so that you can get the same result each time
-    Math.seedrandom(construction.first + construction.last)
+    Math.seedrandom(construction.firstWord + construction.lastWord)
 
     //Perform intersects
     while(firstGroups.length > 0) {
