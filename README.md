@@ -1,5 +1,6 @@
 # 3D Ambigram Generator
 
+In case you somehow got here when you meant to see the actual tool, here's the link:
 https://2catteam.github.io/AmbigramGenerator/
 
 This is a fun tool I developed for developing 3D ambigrams from arbitrary words or phrases.
@@ -10,7 +11,7 @@ While traditionally ambigrams are 2D, I've always found that 3D ambigrams are ju
 
 This generator aims to add just one more layer of complexity to that idea. Rather than directly matching letters together in order, it instead splits the letters into parts, then randomly pairs each part up. The advantage of this over the one-to-one approach is twofold; first, I personally think it looks cooler. Second, and more importantly, it lets you create models where the two profiles don't match in length, which is something the one-to-one approach can't really do without adding other profiles. In my opinion, the result is really cool! Though, obviously, I am super biased, as the creator of the generator. Hopefully you agree! And hopefully you find this tool useful and cool!
 
-Personally, I've found these make great gifts for friends. You can do their first and last name, or for a couple, both of their names, or a person's name and a nice word... Just generate a file, send it to the printer, and your friend thinks you put, like, time and effort into making a custom gift just for them, when in reality, you just had extra time while you were waiting for your TV dinner to finish in the microwave. If you want to put slightly more effort into it, I've found that it looks great to spray-paint your models on one side, so the two profiles stand apart from each other a little more. Just hold it at arm's length, and give it a light, light coat. I've also enjoyed putting them on rotating bases, so that you can see both words without having to move the model yourself.
+Personally, I've found these make great gifts for friends. You can do their first and last name, or their name and a nice word, or for a couple, both of their names together... Just generate a file, send it to the printer, and your friend thinks you put, like, time and effort into making a custom gift just for them, when in reality, you just had extra time while you were waiting for your microwave burrito to finish. If you want to put slightly more effort into it, I've found that it looks great to spray-paint your models on one or both sides, so the two profiles stand apart from each other a little more. Just hold it at arm's length, and give it a light, light coat. I've also enjoyed putting them on rotating bases, so that you can see both words without having to move the model yourself.
 
 ## Potential questions
 
@@ -37,11 +38,11 @@ If you want to make your model easier to see from close-up, you can generate a f
 
 #### What are the limitations of this software?
 
-As noted above, it cannot generate for a particular perspective. It also currently only supports letters and spaces. I may add number support later if someone asks for it, IDK. The SVG files (which implement each new character) are kinda the hardest part.
+As noted above, it cannot generate a model for a particular perspective. It also currently only supports letters, numbers, and spaces. I currently have no plans to implement any more characters, since any characters beyond what is already supported would require a significant number of changes to the current algorithm. That said, feel free to submit any pull requests implementing new characters if you want.
 
 #### Why doesn't this tool support \<feature\>?
 
-Primarily because I slapped this together in a weekend for fun. If you have something you want me to add, though, please let me know and I'll look into it! Better yet, if you want to add the feature yourself, I'm always open to pull requests!
+Primarily because I slapped this together in a weekend for fun. If you have something you want me to add, though, please let me know and I'll look into it (Unless that request is about additional characters - see above)! Better yet, if you want to add the feature yourself, I'm always open to pull requests!
 
 There are probably more questions you may ask, but I can't think of any more right now, so as they get asked, I'll update this page with answers to them.
 
