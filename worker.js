@@ -87,10 +87,6 @@ async function createModel() {
 
 async function createExtrusion(name, depth, pos, doSide, highQuality=false, offset) {
     return new Promise((res, rej) => {
-		  var orientation = true;
-		  if (name == "61-1" || name == "91-1" || name == "41-1" || name == "81-1" || name == "01-1") {
-			  orientation = false;
-		  }
         name = "./letters/" + name + ".svg"
         loader.load(name, async (data) => {
             //Get data in and out prepared
@@ -105,7 +101,7 @@ async function createExtrusion(name, depth, pos, doSide, highQuality=false, offs
 
             //Get this path and make it shapes
             const path = paths[0]
-            const shapes = path.toShapes(orientation);
+            const shapes = path.toShapes(true);
 
             //Material settings
             const material = new THREE.MeshPhongMaterial({
