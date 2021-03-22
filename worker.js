@@ -7,7 +7,7 @@ importScripts('./three/examples/js/loaders/SVGLoader.js')
 
 var loader = new THREE.SVGLoader()
 
-var construction, quality, base
+var construction, quality, base, union
 
 async function createModel() {
     //Build the first set of meshes
@@ -36,15 +36,37 @@ async function createModel() {
         }
     }
 
-    //Material for final shapes
+    //Materials for final shapes
     let material = new THREE.MeshPhongMaterial({
         color: 0x2150CE,
         side: THREE.FrontSide,
         emissive: 0x0f0f0f
     })
 
+    let materialUnion = null
+
+    if (union) {
+        //Different material if unioning after
+        material = new THREE.MeshPhongMaterial({
+            color: 0xAAAA00,
+            side: THREE.FrontSide,
+            transparent: true,
+            opacity: .7,
+            emissive: 0x0f0f0f
+        })
+        materialUnion = new THREE.MeshPhongMaterial({
+            color: 0x2150CE,
+            side: THREE.FrontSide,
+            emissive: 0x0f0f0f
+        })
+    }
+
     //Seed so that you can get the same result each time
     Math.seedrandom(construction.firstWord + construction.lastWord)
+
+    //Make the object to be unioned if needed
+    let unionMesh = null
+    let unionMatrix = null
 
     //Perform intersects
     while(firstGroups.length > 0) {
@@ -67,6 +89,15 @@ async function createModel() {
         postMessage({type: "Del", name: src.name})
         postMessage({type: "Del", name: mask.name})
         postMessage({type: "Add", geometry: toAdd.toJSON()})
+
+        if (union) {
+            if (unionMesh) {
+                unionMesh = unionMesh.union(result)
+            } else {
+                unionMesh = result
+                unionMatrix = mask.matrix
+            }
+        }
     }
 
     material = new THREE.MeshPhongMaterial({
@@ -78,8 +109,30 @@ async function createModel() {
     if (base) {
         const baseGeometry = new THREE.BoxGeometry(construction.firstWidth + 12, 7, construction.lastWidth + 12)
         const base = new THREE.Mesh(baseGeometry, material)
-        postMessage({type: "Add", geometry: base.toJSON(), after: {y: -3.5}})
-        base.translateY(-3.5)
+        postMessage({type: "Add", geometry: base.toJSON(), after: {y: -3.45}})
+        base.translateY(-3.45)
+        if (union) {
+            //Save where it is
+            base.updateMatrixWorld()
+            
+            //Convert to BSP
+            let a = CSG.fromMesh(base)
+            
+            //Perform operation
+            if (unionMesh) {
+                unionMesh = unionMesh.union(a)
+            } else {
+                unionMesh = a
+                unionMatrix = a.matrix
+            }
+        }
+    }
+
+    if (union) {
+        console.log("Adding Union stuff")
+        let toAdd = CSG.toMesh(unionMesh, unionMatrix, materialUnion)
+        postMessage({type: "Clear"})
+        postMessage({type: "Add", geometry: toAdd.toJSON()})
     }
 
     postMessage({type: "Done"})
@@ -149,5 +202,6 @@ onmessage = function(m) {
     construction = m.data[0]
     base = m.data[1]
     quality = m.data[2]
+    union = m.data[3]
     createModel()
 }

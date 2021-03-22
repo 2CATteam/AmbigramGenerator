@@ -242,11 +242,18 @@ async function doGenerate() {
             worker.terminate()
             worker = undefined
             $("#generate").text("Generate!")
+        } else if (msg.data.type == "Clear") {
+            //Delete all children
+            for (var i = scene.children.length - 1; i >= 0; i--) {
+                if (scene.children[i] instanceof THREE.Mesh) {
+                    scene.remove(scene.children[i])
+                }
+            }
         }
     }
 
     //Send initial values
-    worker.postMessage([construction, $("#base:checked").length > 0, $("#quality:checked").length > 0])
+    worker.postMessage([construction, $("#base:checked").length > 0, $("#quality:checked").length > 0, $("#union:checked").length > 0])
 }
 
 //Download STL file
