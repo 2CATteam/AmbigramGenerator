@@ -274,22 +274,23 @@ async function doGenerate() {
             //Consume an X
             x++
             //Increment Y
-            idealY += slope * x
+            idealY += slope
             //Figure out how close we can get with real Y, which is always an integer
-            let rounded = Math.round(idealY)
+            let rounded = Math.round(idealY - 0.00000001) //Force to round .5 to 0
+            //If we consumed an X without consuming a Y, we need to add a First face and try again
+            if (rounded - y == 0) {
+                construction.first.splice(y, 0, construction.first[y])
+                x--
+                t--
+            }
             //If we consumed at least one Y, consume the next First face
             if (rounded - y >= 1) {
                 y++
             }
-            //If we consumed an X without consuming a Y, we need to add a Last face and try again
-            if (rounded - y == 0) {
-                construction.last.splice(x, 0, construction.last[x])
-                t--
-            }
             //If we consumed multiple Ys, we need to add those extra Ys
             if (rounded - y >= 1) {
                 for (let i = 0; i < rounded - y; i++) {
-                    construction.first.splice(y, 0, construction.first[y])
+                    construction.last.splice(y - 1, 0, construction.last[y - 1])
                 }
                 y = rounded
             }
