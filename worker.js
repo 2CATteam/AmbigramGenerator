@@ -7,7 +7,7 @@ importScripts('./three/examples/js/loaders/SVGLoader.js')
 
 var loader = new THREE.SVGLoader()
 
-var construction, quality, base, union
+var construction, quality, base, union, minimize
 
 async function createModel() {
     //Build the first set of meshes
@@ -72,7 +72,7 @@ async function createModel() {
     while(firstGroups.length > 0) {
         //Get the source and the mask
         let src = firstGroups.shift()
-        let mask = lastGroups.splice(Math.floor(Math.random() * lastGroups.length), 1)[0]
+        let mask = lastGroups.splice(minimize ? 0 : Math.floor(Math.random() * lastGroups.length), 1)[0]
         //Save where they are
         src.updateMatrixWorld()
         mask.updateMatrixWorld()
@@ -203,5 +203,6 @@ onmessage = function(m) {
     base = m.data[1]
     quality = m.data[2]
     union = m.data[3]
+    minimize = m.data[4]
     createModel()
 }
