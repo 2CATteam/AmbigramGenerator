@@ -147,7 +147,7 @@ async function doGenerate() {
     var override = false
     while (sumScore("first") > sumScore("last")) {
         if (!simplify("first", override)) {
-            if (override) {
+            if (override || $("#minimize:checked").length > 0) {
                 break
             }
             if (confirm("The first word is too complex!\nThe generation can continue, but the result may look kinda lame.")) {
@@ -160,7 +160,7 @@ async function doGenerate() {
     //If the second is too complex, simplify it.
     while (sumScore("first") < sumScore("last")) {
         if (!simplify("last", override)) {
-            if (override) {
+            if (override || $("#minimize:checked").length > 0) {
                 break
             }
             if (confirm("The second word is too complex!\nThe generation can continue, but the result may look kinda lame.")) {
@@ -252,8 +252,59 @@ async function doGenerate() {
         }
     }
 
+    //Do whatever minimization step is necessary
+    if ($("#minimize:checked").length > 0) {
+        for (let i in construction.first) {
+            construction.first[i].profiles = 1
+        }
+        for (let i in construction.last) {
+            construction.last[i].profiles = 1
+        }
+        //Figure out how many first profiles there should be for each last profile
+        let slope = sumScore("first") / sumScore("last")
+        //Iterate through each Last profile, and as needed, add Last profiles or First profiles
+        //X represents the number of Last faces which have been "consumed"
+        let x = 0
+        //Y represents the number of First faces which have been "consumed"
+        let y = 0
+        //idealY represents the number of First faces which SHOULD have been "consumed"
+        let idealY = 0
+        let end = sumScore("last")
+        for (let t = 0; t < end; t++) {
+            //Consume an X
+            x++
+            //Increment Y
+            idealY += slope
+            //Figure out how close we can get with real Y, which is always an integer
+            let rounded = Math.round(idealY - 0.00000001) //Force to round .5 to 0
+            //If we consumed an X without consuming a Y, we need to add a First face and try again
+            if (rounded - y == 0) {
+                construction.first.splice(y, 0, construction.first[y])
+                x--
+                t--
+            }
+            //If we consumed at least one Y, consume the next First face
+            if (rounded - y >= 1) {
+                y++
+            }
+            //If we consumed multiple Ys, we need to add those extra Ys
+            if (rounded - y >= 1) {
+                for (let i = 0; i < rounded - y; i++) {
+                    construction.last.splice(y - 1, 0, construction.last[y - 1])
+                }
+                y = rounded
+            }
+        }
+    }
+
+    console.log(construction)
+
     //Send initial values
-    worker.postMessage([construction, $("#base:checked").length > 0, $("#quality:checked").length > 0, $("#union:checked").length > 0])
+    worker.postMessage([construction,
+        $("#base:checked").length > 0,
+        $("#quality:checked").length > 0,
+        $("#union:checked").length > 0,
+        $("#minimize:checked").length > 0])
 }
 
 //Download STL file
