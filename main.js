@@ -176,7 +176,7 @@ async function doGenerate() {
     console.log(`Sum of last profiles: ${sumScore("last")}`)
 
     //Duplicate if there is no solution
-    if (sumScore("first") < sumScore("last")) {
+    if (sumScore("first") < sumScore("last") && $("#minimize:checked").length == 0) {
         var i = 0
         while (sumScore("first") < sumScore("last")) {
             var toAdd = {}
@@ -192,7 +192,7 @@ async function doGenerate() {
     }
 
     //Same as above but for the other profile
-    if (sumScore("first") > sumScore("last")) {
+    if (sumScore("first") > sumScore("last") && $("#minimize:checked").length == 0) {
         var i = 0
         while (sumScore("first") > sumScore("last")) {
             var toAdd = {}
